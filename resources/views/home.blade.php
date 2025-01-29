@@ -1,3 +1,3 @@
 <html>
-    <h1>UniversalFitness</h1>
+    <h1 style="font-size:80;padding-left:100">UFitness</h1>
 </html>
