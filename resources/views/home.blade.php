@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 <x-layout>
-    <h1>Universal Fitness</h1>
+    <h1 class = "Title">Universal Fitness</h1>
 </x-layout>
