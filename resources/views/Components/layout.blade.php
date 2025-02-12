@@ -8,7 +8,7 @@
 <header>
     @include('Navbar')
 </header>
-<body>
+<body class = "background">
     {{$slot}}
 </body>
 </html>

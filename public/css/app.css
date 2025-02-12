@@ -1,5 +1,16 @@
 .Title {
+    font-family: Impact, Charcoal, sans-serif;
     font-size: 150px;
+    color: white;
+    text-align: center;
+    margin-top: 100px;
 }
 
+.background {
+    background-color: lightblue
+}
 
+.custom-nav{
+    background-color: lightblue;
+    color:white
+}
