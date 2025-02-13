@@ -1,3 +1,6 @@
+
+<!--> Navbar - code from bootstrap</-->
+<!--> link - https://getbootstrap.com/docs/4.0/components/navbar/</-->
 <nav class="navbar navbar-expand-lg custom-nav">
   <div class="container-fluid">
     <img src="Dumbbell.png" width="100" height = "100" alt="Logo" class="navbar-brand">
