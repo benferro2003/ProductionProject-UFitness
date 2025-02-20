@@ -10,14 +10,14 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Calculators
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Calorie Calculator</a></li>
+            <li><a class="dropdown-item" href="CalorieCalculator">Calorie Calculator</a></li>
             <li><a class="dropdown-item" href="#">1RM Calculator</a></li>
             <li><a class="dropdown-item" href="#">BMI Calculator</a></li>
           </ul>
