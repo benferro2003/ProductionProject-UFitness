@@ -18,8 +18,8 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="CalorieCalculator">Calorie Calculator</a></li>
-            <li><a class="dropdown-item" href="#">1RM Calculator</a></li>
-            <li><a class="dropdown-item" href="#">BMI Calculator</a></li>
+            <li><a class="dropdown-item" href="One_rep_Calculator">1RM Calculator</a></li>
+            <li><a class="dropdown-item" href="BMI_Calculator">BMI Calculator</a></li>
           </ul>
         </li>
       </ul>
