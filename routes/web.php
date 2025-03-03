@@ -15,6 +15,14 @@ Route::get('/CalorieCalculator', function () {
     return view('CalorieCalculator');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/One_rep_Calculator', function () {
+    return view('One_rep_Calculator');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/BMI_Calculator', function () {
+    return view('BMI_Calculator');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
