@@ -16,7 +16,7 @@
     </div>
     <div class="row">
       <div class="col-md-6 offset-md-3">
-        <form action="" method="POST">
+        <form action="POST" method="POST">
           @csrf
           <label for="Age">Age (18-50)</label><br>
           <input type="text" name="age" id="age" class="form-control">
