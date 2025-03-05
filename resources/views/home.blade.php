@@ -1,6 +1,15 @@
-<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <title>Home - UFIT</title>
+</head>
+<body>
 <x-layout>
-    <h1 class = "Title">UFIT</h1>
-    </body>
+    
+    <header>
+        <h1 class="Title display-4">Welcome to UFIT</h1>
+    </header>  
 </x-layout>
+</body>
+</html>
