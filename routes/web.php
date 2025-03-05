@@ -16,7 +16,7 @@ Route::get('/dashboard', function () {
 //Calculator routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/calculator/{type}', [CalculatorController::class, 'show'])->name('calculator.show');
-    //Route for calculating the calories
+    //Route for calculate function
     Route::post('/calculator/{type}/calculate', [CalculatorController::class, 'calculate'])->name('calculator.calculate');
 
 });
