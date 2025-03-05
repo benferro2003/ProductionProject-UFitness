@@ -101,5 +101,30 @@ class CalculatorController extends Controller
             return redirect()->back()->with('result', round($oneRepMax,2));
         }
 
+        //bmi calculator
+        if ($type === 'bmi')
+        {
+            //validate the request
+            $request->validate([
+                'weight' => 'required|numeric|min:30',
+                'height' => 'required|numeric|min:100',
+
+                
+            ]);
+            $weight = $request->input('weight');
+            $height = $request->input('height');
+
+            //calculate bmi
+            //link for calculation: https://www.nhs.uk/health-assessment-tools/calculate-your-body-mass-index/calculate-bmi-for-adults
+            $height = $height / 100;
+            //bmi = weight in kg / height in meters squared 
+            $bmi = $weight / ($height * $height);
+            //store result
+            return redirect()->back()->with('result', round($bmi,2));
+
+        }
+
+
+
     }
 }
