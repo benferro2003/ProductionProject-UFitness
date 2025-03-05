@@ -50,6 +50,7 @@ class CalculatorController extends Controller
             $sex = $request->input('sex');
             $activity = $request->input('activity');
 
+            //link for bmi calculation: https://www.omnicalculator.com/health/bmr-harris-benedict-equation
             //first need to calculate the BMR
             if ($sex === 'male')
             {
@@ -71,12 +72,34 @@ class CalculatorController extends Controller
                 'very_active' => 1.9,
             ];
 
-            
+            //link for tdee calculation: https://www.omnicalculator.com/health/tdee
             //Calculate total daily expenditure
             $tdee = $bmr * $activityLevels[$activity];
 
             //store result
             return redirect()->back()->with('result', round($tdee,2));
         }
+
+        //one rep max calculator
+        if ($type === 'one_rep_max')
+        {
+            //validate the request
+            $request->validate([
+                'max_weight' => 'required|numeric|min:1',
+                'reps' => 'required|integer|min:1',
+            ]);
+
+            //get the values
+            $max = $request->input('max_weight');
+            $reps = $request->input('reps');
+
+            //link for calculation: https://www.omnicalculator.com/sports/one-rep-max
+            //calculate one rep max
+            $oneRepMax = $max * (1 + ($reps/30));
+
+            //store result
+            return redirect()->back()->with('result', round($oneRepMax,2));
+        }
+
     }
 }
