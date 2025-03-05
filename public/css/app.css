@@ -1,16 +1,17 @@
 .Title {
     font-family: Impact, Charcoal, sans-serif;
-    font-size: 150px;
+    font-size: 200px;
+    font-display: block;
     color: white;
     text-align: center;
     margin-top: 100px;
 }
 
 .background {
-    background-color: lightblue
+    background-color: lavender;
 }
 
 .custom-nav{
-    background-color: lightblue;
+    background-color: lavender;
     color:white
 }
