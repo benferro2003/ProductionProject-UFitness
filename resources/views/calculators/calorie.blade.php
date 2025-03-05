@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label for="sex">Sex</label>
                         <select class="form-control" name="sex" id="sex" required>
-                            <option value="" disabled selected>Select your sex</option>
+                            <option value="" disabled selected>sex</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <label for="activity">Activity Level</label>
                         <select class="form-control" name="activity" id="activity" required>
-                            <option value="" disabled selected>Select your activity level</option>
+                            <option value="" disabled selected>activity level</option>
                             <option value="bmr">Basal Metabolic Rate (BMR)</option>
                             <option value="sedentary">Sedentary: Little / no exercise</option>
                             <option value="light">Light: exercise 1-3 times per week</option>
