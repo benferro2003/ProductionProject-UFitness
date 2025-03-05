@@ -2,7 +2,8 @@
 <!-- link - https://getbootstrap.com/docs/4.0/components/navbar/ -->
 <nav class="navbar navbar-expand-lg custom-nav">
   <div class="container-fluid">
-    <img src="Dumbbell.png" width="100" height="100" alt="Logo" class="navbar-brand">
+    <!--Show logo in Nav Bar -->
+    <img src="{{ asset('Dumbbell.png') }}" width="100" height="100" alt="Logo" class="navbar-brand">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -16,14 +17,18 @@
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Calculators
           </a>
+          <!--Drop down menu for calculators-->
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="CalorieCalculator">Calorie Calculator</a></li>
-            <li><a class="dropdown-item" href="One_rep_Calculator">1RM Calculator</a></li>
-            <li><a class="dropdown-item" href="BMI_Calculator">BMI Calculator</a></li>
+            <!--When calculator clicked calculator controller function used -->
+            <li><a class="dropdown-item" href="{{ route('calculator.show', 'calorie') }}">Calorie Calculator</a></li>
+            <li><a class="dropdown-item" href="{{ route('calculator.show', 'one_rep_max') }}">1RM Calculator</a></li>
+            <li><a class="dropdown-item" href="{{ route('calculator.show', 'bmi') }}">BMI Calculator</a></li>
           </ul>
         </li>
       </ul>
 
+      <!--Right side of Nav Bar-->
+      <!--Authentication allows users to login/register/log out -->
       <ul class="navbar-nav ms-auto">
         @auth
       <li class="nav-item dropdown">
