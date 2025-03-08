@@ -57,7 +57,6 @@
                 @if(session('result'))
                     <div class="alert alert-success mt-3">
                         Your estimated TDEE is: {{ session('result') }} kcal/day<br>
-                        To lose 1kg per week, you would need {{ session('result') - 500}} kcal/day
                     </div>
                 @endif
             </div>

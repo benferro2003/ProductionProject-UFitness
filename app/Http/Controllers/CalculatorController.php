@@ -37,7 +37,7 @@ class CalculatorController extends Controller
         {
 
             $request->validate([
-                'age' => 'required|integer|min:18|max:50',
+                'age' => 'required|integer|min:18|max:100',
                 'weight' => 'required|numeric|min:30',
                 'height' => 'required|numeric|min:100',
                 'sex' => 'required|in:male,female',
@@ -50,21 +50,51 @@ class CalculatorController extends Controller
             $sex = $request->input('sex');
             $activity = $request->input('activity');
 
-            //link for bmi calculation: https://www.omnicalculator.com/health/bmr-harris-benedict-equation
-            //first need to calculate the BMR
+            //oxford/henry equation used
+            //https://macrofactorapp.com/best-bmr-equations/
             if ($sex === 'male')
             {
-                $bmr = (10*$weight) + (6.25*$height) - (5*$age) + 5;
+                if($age >= 18 and $age <=30)
+                {
+                    //BMR = 14.4 × Body Mass + 3.13 × Height + 113
+                    $bmr = (14.4*$weight) + (3.13*$height) + 113;
+                }
+                if ($age > 30 and $age <= 60)
+                {
+                    //BMR = 11.4 × Body Mass + 5.41 × Height -137
+                    $bmr = (11.4*$weight) + (5.41*$height) - 137;
+                }
+                if ($age > 60)
+                {
+                    //BMR = 11.4 × Body Mass + 5.41 × Height – 256
+                    $bmr = (11.4*$weight) + (5.41*$height) - 256;
+                }
+                
 
             }
-            else
+            else if ($sex === 'female')
             {
-                $bmr = (10*$weight) + (6.25*$height) - (5*$age) + 5;
-
+                if($age >= 18 and $age <= 30)
+                {
+                    //BMR = 10.4 × Body Mass + 6.15 × Height – 282
+                    $bmr = (10.4*$weight) + (6.15*$height) - 282;
+                }
+                if ($age > 30 and $age <= 60)
+                {
+                    //BMR = 8.18 × Body Mass + 5.02 × Height – 11.6
+                    $bmr = (8.18*$weight) + (5.02*$height) - 11.6;
+                }
+                if ($age > 60)
+                {
+                    //BMR = 8.52 × Body Mass + 4.21 × Height + 10.7
+                    $bmr = (8.52*$weight) + (4.21*$height) + 10.7;
+                }
             }
+           
 
             //associate values with activity levels
             $activityLevels = [
+                'bmr' => 1,
                 'sedentary' => 1.2,
                 'light' => 1.375,
                 'moderate' => 1.55,
@@ -72,8 +102,7 @@ class CalculatorController extends Controller
                 'very_active' => 1.9,
             ];
 
-            //link for tdee calculation: https://www.omnicalculator.com/health/tdee
-            //Calculate total daily expenditure
+            //calculate TDEE = BMR * activity level value
             $tdee = $bmr * $activityLevels[$activity];
 
             //store result
