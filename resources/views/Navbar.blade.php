@@ -25,6 +25,16 @@
             <li><a class="dropdown-item" href="{{ route('calculator.show', 'bmi') }}">BMI Calculator</a></li>
           </ul>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Workouts
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="">My Workouts</a></li>
+            <li><a class="dropdown-item" href="">Workout Generator</a></li>
+          </ul>
+        </li>
       </ul>
 
       <!--Right side of Nav Bar-->
