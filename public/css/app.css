@@ -16,3 +16,31 @@
     color:white
 }
 
+/** Custom css for section title e.g. graph, about */
+.section-title{
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 1.8rem;
+    font-display: block;
+    color: #34495e;
+    text-align:left;
+    margin-top: 50px;
+}
+
+/** Custom css for graph */
+.graph-workouts{
+    width: 40%;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+}
+/** opposite side to workout graph */
+.graph-weights{
+    width: 40%;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+
+}
+
