@@ -32,7 +32,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="">My Workouts</a></li>
-            <li><a class="dropdown-item" href="">Workout Generator</a></li>
+            <li><a class="dropdown-item" href="{{ route('generator.show') }}">Workout Generator</a></li>
           </ul>
         </li>
       </ul>
