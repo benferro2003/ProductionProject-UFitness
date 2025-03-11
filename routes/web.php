@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CalculatorController;
+use App\Http\Controllers\WorkoutController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +21,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/calculator/{type}/calculate', [CalculatorController::class, 'calculate'])->name('calculator.calculate');
 
 });
+
+//workout routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/workouts/create', [WorkoutController::class, 'show'])->name('generator.show');
+    Route::post('/generate-workout', [WorkoutController::class, 'generate'])->name('generate.workout');
+});
+
 
 //Profile routes
 Route::middleware('auth')->group(function () {
