@@ -12,6 +12,16 @@
     padding: 60px 20px;
 }
 
+.form-container{
+    width: 90%;
+    margin-left: 65px;
+    margin-right: 70px;
+    background-color: #34495e;
+    border-radius: 8px;
+    padding: 80px;
+    text-align: center;
+}
+
 .graph-container{
     display: flex;
     flex-wrap: wrap;
@@ -23,6 +33,15 @@
 
 .about-container{
     width: 40%;
+    margin-top: 50px;
+    margin-left: 70px;
+    background-color: #34495e;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.workout-container{
+    width: 90%;
     margin-top: 50px;
     margin-left: 70px;
     background-color: #34495e;
