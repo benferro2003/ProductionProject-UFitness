@@ -25,7 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //workout routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/workouts/create', [WorkoutController::class, 'show'])->name('generator.show');
-    Route::post('/generate-workout', [WorkoutController::class, 'generate'])->name('generate.workout');
+    Route::post('/workouts/result', [WorkoutController::class, 'generate'])->name('generate.workout');
 });
 
 
