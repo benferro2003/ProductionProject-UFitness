@@ -21,7 +21,7 @@
                 Whether you are a beginner looking to get started or an experienced athlete looking to take your training to the next level, UFIT has something for everyone.</p>
         </div>
 
-        <div class = "graph-container">
+        <div class = "wrapped-containers">
             <div class = "graph-workouts">
                 <p class = "section-title">Workouts Per Week</p>
                 <p class = "section-title">workout progress placeholder</p>
