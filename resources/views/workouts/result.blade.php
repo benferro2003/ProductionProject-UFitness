@@ -14,31 +14,54 @@
 </head>
 
 <body class="background">
-    <div>
-        <h1 class="Title">Results</h1>
+    <h1 class="Title">Results</h1>
+    <div class = "wrapped-containers">
+        
 
-        <div class="about-container">
+        <div class= "left-container">
             <h3>Your Available Days:</h3>
             <ul>
                 @foreach($workoutPlan['available_days'] as $day)
                     <li>{{ $day }}</li>
                 @endforeach
             </ul>
-        </div>
 
-        <div class="about-container">
             <h3>Your Available equipment:</h3>
             <ul>
                 @foreach($workoutPlan['equipment'] as $equipment)
                     <li>{{ $equipment }}</li>
                 @endforeach
             </ul>
-        </div>
 
-        <div class="about-container">
-            <h3>Your Fitness Level:</h3>
-            <p>{{ $workoutPlan['fitness_level'] }}</p>
-        </div>
+            <h3>Your Desired Difficulty:</h3>
+            <ul>
+                <li>{{ $workoutPlan['fitness_level'] }}</li>
+            </ul>
+        </div><br>
+
+       
+
+        <div class="right-container">
+            <h3>Your Training Goal:</h3>
+            <ul>
+                <li>{{ $workoutPlan['training_goal'] }}</li>
+            </ul>
+
+            <h3>Your Preffered Duration</h3>
+            <ul>
+                <li>{{ $workoutPlan['workout_length'] }}</li>
+            </ul>
+            
+
+            <h3>Your Targeted Muscles:</h3>
+            <ul>
+                @foreach($workoutPlan['target_muscles'] as $muscle)
+                    <li>{{ $muscle }}</li>
+                @endforeach
+            </ul>
+        </div><br>
+
+
     </div><br><br>
 
     <h1 class = "Title" m-10>Generated Workout Plan:</h1>
@@ -48,13 +71,18 @@
                 @foreach($workoutData as $exercise)
                     <div class="col-md-4">
                         <div class="card mb-3">
-                            <img src="{{ $exercise['gifUrl'] ?? 'https://via.placeholder.com/150' }}" class="card-img-top"
+                            <img src="{{ $exercise['gifUrl']}}" class="card-img-top"
                                 alt="Exercise GIF">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $exercise['name']}}</h5>
                                 <p class="card-text">Target Muscle:{{ $exercise['target']}}</p>
                                 <p class="card-text">Body Part:{{ $exercise['bodyPart']}}</p>
                                 <p class="card-text">Equipment:{{ $exercise['equipment']}}</p>
+                                <p class="card-text">Instructions:</p>
+                                <ul>
+                                    @foreach($exercise['instructions'] as $instruction)
+                                        <li>{{ $instruction }}</li>
+                                    @endforeach
                             </div>
                         </div>
                     </div>
