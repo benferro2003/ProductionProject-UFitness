@@ -19,10 +19,16 @@ class WorkoutController extends Controller
         'available_days' => 'required|array',
         'equipment' => 'required|array',
         'fitness_level' => 'required|string',
+        'training_goal' => 'required|string',
+        'workout_length' => 'required|int',
+        'target_muscles' => 'required|array',
+
     ]);
 
     // Get the list of equipment
     $equipmentList = $validatedData['equipment'];
+    // Get the total number of days available to train
+    $totalDays = count($validatedData['available_days']);
 
     // create empty array to store workout data
     $workoutData = [];
@@ -57,10 +63,12 @@ class WorkoutController extends Controller
         }
     }
 
+    //filter exercises based on bodypart e.g. waist, upper arms, lower arms, chest, back, legs, shoulders using target_muscles
+
     //return workout result view
     return view('workouts.result', [
         'workoutPlan' => $validatedData,
-        'workoutData' => $workoutData
+        'workoutData' => $workoutData,
     ]);
 }
 
@@ -68,3 +76,22 @@ class WorkoutController extends Controller
 
 //currently only returns exercises based on equipment, need to add more logic to generate a workout plan
 //for the user based on their fitness level and available days
+//accessing /exercises/equipment/type
+//response gives
+//[
+    //{
+      //"bodyPart": "",
+      //"equipment": "",
+      //"gifUrl": "",
+      //"id": "",
+      //"name": "",
+      //"target": "",
+      //"secondaryMuscles": [],
+      //"instructions": []
+    //}
+ //]
+
+ //next time i code I need to...
+ //filter exercises based on bodypart e.g. waist, upper arms, lower arms, chest, back, legs, shoulders
+ //create a workout plan based on the user's fitness level and available days
+ //return the workout plan to the user
