@@ -15,10 +15,10 @@
 
 <body class="background">
     <h1 class="Title">Results</h1>
-    <div class = "wrapped-containers">
-        
+    <div class="wrapped-containers">
 
-        <div class= "left-container">
+
+        <div class="left-container">
             <h3>Your Available Days:</h3>
             <ul>
                 @foreach($workoutPlan['available_days'] as $day)
@@ -39,7 +39,7 @@
             </ul>
         </div><br>
 
-       
+
 
         <div class="right-container">
             <h3>Your Training Goal:</h3>
@@ -51,7 +51,7 @@
             <ul>
                 <li>{{ $workoutPlan['workout_length'] }}</li>
             </ul>
-            
+
 
             <h3>Your Targeted Muscles:</h3>
             <ul>
@@ -64,37 +64,42 @@
 
     </div><br><br>
 
-    <h1 class = "Title" m-10>Generated Workout Plan:</h1>
+    <h1 class="Title m-10">Generated Workout Plan:</h1>
     <div class="workout-container">
-        @if(is_array($workoutData))
-            <div class="row">
-                @foreach($workoutData as $exercise)
-                    <div class="col-md-4">
-                        <div class="card mb-3">
-                            <img src="{{ $exercise['gifUrl']}}" class="card-img-top"
-                                alt="Exercise GIF">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $exercise['name']}}</h5>
-                                <p class="card-text">Target Muscle:{{ $exercise['target']}}</p>
-                                <p class="card-text">Body Part:{{ $exercise['bodyPart']}}</p>
-                                <p class="card-text">Equipment:{{ $exercise['equipment']}}</p>
-                                <p class="card-text">Instructions:</p>
-                                <ul>
-                                    @foreach($exercise['instructions'] as $instruction)
-                                        <li>{{ $instruction }}</li>
-                                    @endforeach
+        @if(is_array($workoutData) && count($workoutData) > 0)
+            @foreach($workoutData as $day => $exercises)
+                <div>
+                    <h2 class = "Title">{{ $day }}</h2>
+                    <div class = "row"> 
+                        @foreach($exercises as $exercise)
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="font-weight:bold">{{ $exercise['name'] }}</h5><br>
+                                        <p class="card-text"><strong>Body Part:</strong> {{ $exercise['bodyPart'] }}</p>
+                                        <p class="card-text"><strong>Target Muscle:</strong> {{ $exercise['target'] }}</p>
+                                        <p class="card-text"><strong>Equipment:</strong> {{ $exercise['equipment'] }}</p>
+                                        <p class="card-text"><strong>Instructions:</strong></p>
+                                        <img src="{{ $exercise['gifUrl'] }}" class="card-img" alt="Exercise GIF">
+                                        <ul>
+                                            @foreach($exercise['instructions'] as $instruction)
+                                                <li>{{ $instruction }}</li>
+                                            @endforeach
+                                        </ul>
+                                        
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         @else
-            <p>No exercises found for the selected criteria.</p>
+            <p>No workout plan available.</p>
         @endif
     </div>
 
 
 
 </body>
-
 </html>
