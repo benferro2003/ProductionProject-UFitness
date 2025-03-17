@@ -15,20 +15,19 @@
 
 <body class="background">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row justify-content-center">
+            <div class="form-container">
                 <h1 class="Title">Generate a Workout</h1>
             </div>
         </div>
-        <div class="form-container">
-            <div class="col-md-6 offset-md-3">
+        <!-- card with no background color -->
+        <div class="card" style="background-color: #34495e; color: white; border-radius: 10px;">
                 <form action="{{ route('generate.workout') }}" method="POST">
                     @csrf
-                    <div class="form-containers">
-                        <div class="left">
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-control-lg">
-                                <label for="available_days">Available Days:</label><br>
-                                <!-- radio form allowing multiple days to be selected -->
+                                <label class = "form-label fw-bold" for="available_days">Available Days:</label><br>
                                 <input type="checkbox" name="available_days[]" value="Mon"> Monday<br>
                                 <input type="checkbox" name="available_days[]" value="Tue"> Tuesday<br>
                                 <input type="checkbox" name="available_days[]" value="Wed"> Wednesday<br>
@@ -39,7 +38,7 @@
                             </div><br>
 
                             <div class="form-control-lg">
-                                <label for="equipment">Available Equipment:</label><br>
+                                <label class = "form-label fw-bold" for="equipment">Available Equipment:</label><br>
                                 <input type="checkbox" name="equipment[]" value="dumbbell"> Dumbbell<br>
                                 <input type="checkbox" name="equipment[]" value="barbell"> Barbell<br>
                                 <input type="checkbox" name="equipment[]" value="kettlebell"> Kettlebell<br>
@@ -48,8 +47,8 @@
                             </div><br>
 
                             <div class="form-control-lg">
-                                <label for="fitness_level">Desired Difficulty:</label required><br>
-                                <select name="fitness_level" id="fitness_level">
+                                <label class = "form-label fw-bold" for="fitness_level">Desired Difficulty:</label required><br>
+                                <select  class = "form-select" name="fitness_level" id="fitness_level">
                                     <option value="Beginner">Beginner</option><br>
                                     <option value="Intermediate">Intermediate</option><br>
                                     <option value="Advanced">Advanced</option><br>
@@ -57,23 +56,23 @@
                             </div><br>
                         </div>
 
-                        <div class="right">
+                        <div class="col-md-6">
                             <div class="form-control-lg">
-                                <label for="training_goal">Training Goal:</label required><br>
-                                <input type="radio" name="training_goal" value="strength">Strength training<br>
-                                <input type="radio" name="training_goal" value="hypertrophy">Muscle growth<br>
-                                <input type="radio" name="training_goal" value="endurance">Endurance training<br>
+                                <label class = "form-label fw-bold" for="training_goal">Training Goal:</label required><br>
+                                <input type="radio" name="training_goal" value="strength">  Strength training<br>
+                                <input type="radio" name="training_goal" value="hypertrophy">   Muscle growth<br>
+                                <input type="radio" name="training_goal" value="endurance"> Endurance training<br>
                             </div><br>
 
                             <div class="form-control-lg">
-                                <label for="workout_length">Workout Length:</label required><br>
-                                <input type="radio" name="workout_length" value="30">30 minutes<br>
-                                <input type="radio" name="workout_length" value="45">45 minutes<br>
-                                <input type="radio" name="workout_length" value="60">60 minutes<br>
+                                <label class = "form-label fw-bold" for="workout_length">Workout Length:</label required><br>
+                                <input type="radio" name="workout_length" value="30">   30 minutes<br>
+                                <input type="radio" name="workout_length" value="45">   45 minutes<br>
+                                <input type="radio" name="workout_length" value="60">   60 minutes<br>
                             </div><br>
 
                             <div class="form-control-lg">
-                                <label for="target_muscles">BodyParts to Target:</label required><br>
+                                <label class = "form-label fw-bold" for="target_muscles">BodyParts to Target:</label required><br>
                                 <input type="checkbox" name="target_muscles[]" value = "back"> back<br>
                                 <input type="checkbox" name="target_muscles[]" value = "cardio"> cardio<br>
                                 <input type="checkbox" name="target_muscles[]" value = "chest"> chest<br>
@@ -88,7 +87,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Generate</button>
+                    <button type="submit" class="btn btn-primary w-100 mt-50" style="background-color: white; color: #34495e; border-radius:10px; border-color: #34495e;"> Generate Workout</button><br><br>
                 </form>
             </div>
         </div>

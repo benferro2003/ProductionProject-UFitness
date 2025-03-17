@@ -30,6 +30,15 @@
 
 }
 
+.card{
+    min-height: 100v;
+    width: 100%;
+    margin-top: 50px;
+    margin-left: 0px;
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
 .form-containers{
     display: flex;
     justify-content: space-between;

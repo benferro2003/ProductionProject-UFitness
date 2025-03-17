@@ -94,4 +94,4 @@ class WorkoutController extends Controller
  //next time i code I need to...
  //filter exercises based on bodypart e.g. waist, upper arms, lower arms, chest, back, legs, shoulders
  //create a workout plan based on the user's fitness level and available days
- //return the workout plan to the user
+ //return the workout plan to the user in results blade
