@@ -68,79 +68,82 @@ class WorkoutController extends Controller
     $filteredExercises = array_filter($workoutData, function ($exercise) use ($validatedData) {
         return in_array($exercise['bodyPart'], $validatedData['target_muscles']);
     });
-    //ouput the contents of $filteredExercises
+
     //dd($filteredExercises);
-    //now use $totaldays to generate a workout plan
-    //$volume is number of exercises per workout / available_day
-    $volume = 6;
-    //create a workout plan based on the user's fitness level and available days 
-    $plan = [];
-    //make each days exercises a split of the bodypart exercises
-    //e.g. day 1 has 6 exercises, day 2 has 6 exercises, day 3 has 6 exercises but each day has different exercises with equal volume of selected target muscles
-    if($totalDays == 1){
-        $workoutData = array_slice($filteredExercises, 0, $volume);
-    } else
-    if($totalDays == 2){
-        $workoutData = array_slice($filteredExercises, 0, $volume*2);
-        //create a workout plan for two days with day 1 and day 2 each with 6 exercises
-        $plan = [
-            'Day 1' => array_slice($workoutData, 0, $volume),
-            'Day 2' => array_slice($workoutData, $volume, $volume)
-        ];
-        //dd($plan);
-        
-    }elseif($totalDays == 3){
-        $workoutData = array_slice($filteredExercises, 0, $volume*3);
-        //create a workout plan for three days with day 1, day 2 and day 3 each with 6 exercises
-        $plan = [
-            'Day 1' => array_slice($workoutData, 0, $volume),
-            'Day 2' => array_slice($workoutData, $volume, $volume),
-            'Day 3' => array_slice($workoutData, $volume*2, $volume)
-        ];
-    }elseif($totalDays == 4){
-        $workoutData = array_slice($filteredExercises, 0, $volume*4);
-        //create a workout plan for four days with day 1, day 2, day 3 and day 4 each with 6 exercises
-        $plan = [
-            'Day 1' => array_slice($workoutData, 0, $volume),
-            'Day 2' => array_slice($workoutData, $volume, $volume),
-            'Day 3' => array_slice($workoutData, $volume*2, $volume),
-            'Day 4' => array_slice($workoutData, $volume*3, $volume)
-        ];
-    } elseif($totalDays == 5){
-        $workoutData = array_slice($filteredExercises, 0, $volume*5);
-        //create a workout plan for five days with day 1, day 2, day 3, day 4 and day 5 each with 6 exercises
-        $plan = [
-            'Day 1' => array_slice($workoutData, 0, $volume),
-            'Day 2' => array_slice($workoutData, $volume, $volume),
-            'Day 3' => array_slice($workoutData, $volume*2, $volume),
-            'Day 4' => array_slice($workoutData, $volume*3, $volume),
-            'Day 5' => array_slice($workoutData, $volume*4, $volume)
-        ];
-    } elseif($totalDays == 6){
-        $workoutData = array_slice($filteredExercises, 0, $volume*6);
-        //create a workout plan for six days with day 1, day 2, day 3, day 4, day 5 and day 6 each with 6 exercises
-        $plan = [
-            'Day 1' => array_slice($workoutData, 0, $volume),
-            'Day 2' => array_slice($workoutData, $volume, $volume),
-            'Day 3' => array_slice($workoutData, $volume*2, $volume),
-            'Day 4' => array_slice($workoutData, $volume*3, $volume),
-            'Day 5' => array_slice($workoutData, $volume*4, $volume),
-            'Day 6' => array_slice($workoutData, $volume*5, $volume)
-        ];
-        
-    } elseif($totalDays == 7){
-        $workoutData = array_slice($filteredExercises, 0, $volume*7);
-        //create a workout plan for seven days with day 1, day 2, day 3, day 4, day 5, day 6 and day 7 each with 6 exercises
-        $plan = [
-            'Day 1' => array_slice($workoutData, 0, $volume),
-            'Day 2' => array_slice($workoutData, $volume, $volume),
-            'Day 3' => array_slice($workoutData, $volume*2, $volume),
-            'Day 4' => array_slice($workoutData, $volume*3, $volume),
-            'Day 5' => array_slice($workoutData, $volume*4, $volume),
-            'Day 6' => array_slice($workoutData, $volume*5, $volume),
-            'Day 7' => array_slice($workoutData, $volume*6, $volume)
-        ];
+
+
+    //set volume of exercises per workout based on the user's fitness level
+    //For now just set the volume based on the fitness level not the split.
+    $fitnessLevel = $validatedData['fitness_level'];
+    switch($fitnessLevel){
+        case 'Beginner':
+            $volume = 4;
+            break;
+        case 'Intermediate':
+            $volume = 6;
+            break;
+        case 'Advanced':
+            $volume = 8;
+            break;
     }
+
+
+    $goal = $validatedData['training_goal'];
+ 
+    //switch case to set the number of sets and reps based on the user's goal
+    switch($goal){
+        case 'strength':
+            $reps = "4-6";
+            $sets = 2;
+            break;
+        case 'hypertrophy':
+            $reps = "8-10";
+            $sets = 3;
+            break;
+        case 'endurance':
+            $reps = "10-12";
+            $sets = 4;
+            break;
+    }
+
+    $splits = [
+        'FullBody' => ['FullBody'],
+        'UpperLower' => ['UpperDay', 'LowerDay'],
+        'PPL' => ['Push', 'Pull', 'Legs'],
+    ];
+
+    $split = $validatedData['workout_split']??null;
+    function createSplit($totalDays,$split = null): string
+    {
+        if($split){return $split;}
+        else{
+            if ($totalDays <= 2){return 'FullBody';}
+            elseif ($totalDays <= 3){return 'UpperLower';}
+            else{return 'PPL';}
+        }
+
+    }
+
+    //function to create a workout plan 
+    //based on the filtered exercises, volume and total days
+    //returns an array of workout plan
+    function createPlan($filteredExercises,$volume,$totalDays,$splitChosen,$splits){
+        $workoutData = array_slice($filteredExercises, 0, $volume * $totalDays);
+        $plan = [];
+
+        $splitDays = $splits[$splitChosen];
+        $splitCount = count($splitDays);
+
+        for ($i = 0; $i < $totalDays; $i++) {
+            $day = $splitDays[$i % $splitCount];
+            $plan["Day" . ($i+1) . " - $day"] = array_slice($workoutData, $i * $volume, $volume);
+        }
+
+        return $plan;
+    }
+
+    $splitChosen = createSplit($totalDays,$split);
+    $plan = createPlan($filteredExercises,$volume,$totalDays,$splitChosen,$splits);
 
 
 
@@ -148,9 +151,9 @@ class WorkoutController extends Controller
     //return workout result view
     return view('workouts.result', [
         'workoutPlan' => $validatedData,
-        //to access the workout plan in the results.blade.php would need to use $workoutData
-        //to ouput each days individual exercises would need to use $plan
         'workoutData' => $plan,
+        'sets' => $sets,
+        'reps' => $reps
     ]);
 }
 
