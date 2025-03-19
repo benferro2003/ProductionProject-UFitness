@@ -20,7 +20,7 @@ class WorkoutController extends Controller
         'equipment' => 'required|array',
         'fitness_level' => 'required|string',
         'training_goal' => 'required|string',
-        'workout_length' => 'required|int',
+        'workout_split' => 'string',
         'target_muscles' => 'required|array',
 
     ]);

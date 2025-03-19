@@ -65,10 +65,10 @@
                             </div><br>
 
                             <div class="form-control-lg">
-                                <label class = "form-label fw-bold" for="workout_length">Workout Length:</label required><br>
-                                <input type="radio" name="workout_length" value="30">   30 minutes<br>
-                                <input type="radio" name="workout_length" value="45">   45 minutes<br>
-                                <input type="radio" name="workout_length" value="60">   60 minutes<br>
+                                <label class = "form-label fw-bold" for="workout_length">Workout Split: (Optional)</label required><br>
+                                <input type="radio" name="workout_split" value="FullBody">   Full Body (best for beginner lifters)<br>
+                                <input type="radio" name="workout_split" value="PPL">   Push Pull legs (best for Intermediate lifters)<br>
+                                <input type="radio" name="workout_split" value="UpperLower">   Upper Lower (best for Advanced lifters)<br>
                             </div><br>
 
                             <div class="form-control-lg">

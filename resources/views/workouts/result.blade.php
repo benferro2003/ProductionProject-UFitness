@@ -47,9 +47,9 @@
                 <li>{{ $workoutPlan['training_goal'] }}</li>
             </ul>
 
-            <h3>Your Preffered Duration</h3>
+            <h3>Your Preffered split</h3>
             <ul>
-                <li>{{ $workoutPlan['workout_length'] }}</li>
+                <li>{{ $workoutPlan['workout_split'] }}</li>
             </ul>
 
 
@@ -69,18 +69,20 @@
         @if(is_array($workoutData) && count($workoutData) > 0)
             @foreach($workoutData as $day => $exercises)
                 <div>
-                    <h2 class = "Title">{{ $day }}</h2>
+                    <h2>{{ $day }}</h2>
                     <div class = "row"> 
                         @foreach($exercises as $exercise)
                             <div class="col-md-4">
                                 <div class="card mb-3">
                                     <div class="card-body">
-                                        <h5 class="card-title" style="font-weight:bold">{{ $exercise['name'] }}</h5><br>
+                                        <h2 class="card-title" style="font-weight:bold">{{ $exercise['name'] }}</h2><br>
+                                        <p class ="card-text"><strong>Sets:</strong> {{ $sets }}</p>
+                                        <p class ="card-text"><strong>Reps:</strong> {{ $reps }}</p>
                                         <p class="card-text"><strong>Body Part:</strong> {{ $exercise['bodyPart'] }}</p>
                                         <p class="card-text"><strong>Target Muscle:</strong> {{ $exercise['target'] }}</p>
                                         <p class="card-text"><strong>Equipment:</strong> {{ $exercise['equipment'] }}</p>
                                         <p class="card-text"><strong>Instructions:</strong></p>
-                                        <img src="{{ $exercise['gifUrl'] }}" class="card-img" alt="Exercise GIF">
+                                        <img src="{{ $exercise['gifUrl'] }}" class="card-img" alt="Exercise image">
                                         <ul>
                                             @foreach($exercise['instructions'] as $instruction)
                                                 <li>{{ $instruction }}</li>
