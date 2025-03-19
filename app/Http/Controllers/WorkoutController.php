@@ -111,6 +111,37 @@ class WorkoutController extends Controller
         'UpperLower' => ['UpperDay', 'LowerDay'],
         'PPL' => ['Push', 'Pull', 'Legs'],
     ];
+    //api target muscles list
+    //0:"abductors"
+    //1:"abs"
+    //2:"adductors"
+    ///3:"biceps"
+    ///4:"calves"
+    ///5:"cardiovascular system"
+    ///6:"delts"
+    ///7:"forearms"
+    ///8:"glutes"
+    ///9:"hamstrings"
+    ///10:"lats"
+    ///11:"levator scapulae"
+    ///12:"pectorals"
+    ///13:"quads"
+    ///14:"serratus anterior"
+    ///15:"spine"
+    ///16:"traps"
+    ///17:"triceps"
+    ///18:"upper back"
+    $splitTarget = [
+        'FullBody' => ['abs', 'biceps', 'calves', 'cardiovascular system', 'delts', 'forearms', 'glutes', 'hamstrings', 'lats', 'pectorals', 'quads', 'serratus anterior', 'spine', 'traps', 'triceps', 'upper back'],
+        'UpperDay' => ['biceps', 'delts', 'forearms','lats', 'pectorals','traps', 'triceps', 'upper back'],
+        'LowerDay' => ['abs', 'calves', 'cardiovascular system', 'glutes', 'hamstrings', 'quads', 'spine','abductors','adductors'],
+        'Push' => ['pectorals','traps', 'delts', 'triceps'],
+        'Pull' => ['lats', 'biceps', 'forearms', 'upper back'],
+        'Legs' => ['quads', 'hamstrings', 'glutes', 'calves', 'abductors', 'adductors'],
+    ];
+
+    //dd($splitTarget);
+
 
     $split = $validatedData['workout_split']??null;
     function createSplit($totalDays,$split = null): string
@@ -124,25 +155,51 @@ class WorkoutController extends Controller
 
     }
 
+    //function that filters workout data based on the split chosen which matched to splitTarget which has the associatd target muscles for each split(splitChosen)
+    function mapExercisesToSplit($splitChosen,$splits,$workoutData,$splitTarget)
+    {
+        //use splitChosen to get splitTarget, then use splitTarget to filter workoutData matching the target muscles
+        //Illegal offset type
+        //$i relates to index of split days e.g. $splitDays[0] = 'Push', in this instance
+        //need to make for loop to filter 
+        $splitDays = $splits[$splitChosen];
+        $filteredExercises = [];
+        for ($i = 0; $i < count($splitDays); $i++) {
+            $filteredExercises[$splitDays[$i]] = array_filter($workoutData, function ($exercise) use ($splitTarget,$splitDays,$i) {
+                return in_array($exercise['target'], $splitTarget[$splitDays[$i]]);
+            });
+        }
+        return $filteredExercises;
+    }
+
     //function to create a workout plan 
     //based on the filtered exercises, volume and total days
     //returns an array of workout plan
     function createPlan($filteredExercises,$volume,$totalDays,$splitChosen,$splits){
-        $workoutData = array_slice($filteredExercises, 0, $volume * $totalDays);
         $plan = [];
 
+        //retrieve the split days based on the split chosen e.g. PPL = ['Push', 'Pull', 'Legs']
         $splitDays = $splits[$splitChosen];
+        //count of split days e.g. PPL = 3
         $splitCount = count($splitDays);
-
+    
+        //for loop to create the workout plan
         for ($i = 0; $i < $totalDays; $i++) {
-            $day = $splitDays[$i % $splitCount];
-            $plan["Day" . ($i+1) . " - $day"] = array_slice($workoutData, $i * $volume, $volume);
+            //get the day based on the split days
+            $day = $splitDays[$i % $splitCount]; 
+            //get the exercises for the day
+            $exercises = $filteredExercises[$day];
+            //shuffle exercises
+            $plan["Day " . ($i + 1) . " - $day"] = array_slice($exercises, 0, $volume);
         }
-
+        
         return $plan;
     }
 
     $splitChosen = createSplit($totalDays,$split);
+    $filteredExercises = mapExercisesToSplit($splitChosen,$splits,$filteredExercises,$splitTarget);
+    //dd($filteredExercises);
+    //result shows correct filtering of push pull leg exercises
     $plan = createPlan($filteredExercises,$volume,$totalDays,$splitChosen,$splits);
 
 
@@ -159,24 +216,5 @@ class WorkoutController extends Controller
 
 }
 
-//currently only returns exercises based on equipment, need to add more logic to generate a workout plan
-//for the user based on their fitness level and available days
-//accessing /exercises/equipment/type
-//response gives
-//[
-    //{
-      //"bodyPart": "",
-      //"equipment": "",
-      //"gifUrl": "",
-      //"id": "",
-      //"name": "",
-      //"target": "",
-      //"secondaryMuscles": [],
-      //"instructions": []
-    //}
- //]
-
- //next time i code I need to...
- //filter exercises based on bodypart e.g. waist, upper arms, lower arms, chest, back, legs, shoulders
- //create a workout plan based on the user's fitness level and available days
- //return the workout plan to the user in results blade
+//to do:
+//ensure that the exercises are shuffled such as an upper day has a variety of exercises and tries to cover all target muscles in that split day.
