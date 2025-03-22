@@ -28,6 +28,7 @@
                         <div class="col-md-6">
                             <div class="form-control-lg">
                                 <label class = "form-label fw-bold" for="available_days">Available Days:</label><br>
+                                <input type="checkbox" name="available_days[]" value = "all days"> Select All<br>
                                 <input type="checkbox" name="available_days[]" value="Mon"> Monday<br>
                                 <input type="checkbox" name="available_days[]" value="Tue"> Tuesday<br>
                                 <input type="checkbox" name="available_days[]" value="Wed"> Wednesday<br>
@@ -39,6 +40,7 @@
 
                             <div class="form-control-lg">
                                 <label class = "form-label fw-bold" for="equipment">Available Equipment:</label><br>
+                                <input type="checkbox" name="equipment[]" value = "all equipment"> Select All<br>
                                 <input type="checkbox" name="equipment[]" value="dumbbell"> Dumbbell<br>
                                 <input type="checkbox" name="equipment[]" value="barbell"> Barbell<br>
                                 <input type="checkbox" name="equipment[]" value="kettlebell"> Kettlebell<br>
@@ -73,16 +75,17 @@
 
                             <div class="form-control-lg">
                                 <label class = "form-label fw-bold" for="target_muscles">BodyParts to Target:</label required><br>
+                                <!-- option to select all -->
+                                <input type="checkbox" name="target_muscles[]" value = "full body"> Select All<br>
                                 <input type="checkbox" name="target_muscles[]" value = "back"> back<br>
                                 <input type="checkbox" name="target_muscles[]" value = "cardio"> cardio<br>
                                 <input type="checkbox" name="target_muscles[]" value = "chest"> chest<br>
                                 <input type="checkbox" name="target_muscles[]" value = "lower arms"> lower arms<br>
                                 <input type="checkbox" name="target_muscles[]" value = "lower legs"> lower legs<br>
-                                <input type="checkbox" name="target_muscles[]" value = "neck"> neck<br>
                                 <input type="checkbox" name="target_muscles[]" value = "shoulders"> shoulders<br>
                                 <input type="checkbox" name="target_muscles[]" value = "upper arms"> upper arms<br>
                                 <input type="checkbox" name="target_muscles[]" value = "upper legs"> upper legs<br>
-                                <input type="checkbox" name="target_muscles[]" value = "waist"> waist<br>
+                                <input type="checkbox" name="target_muscles[]" value = "waist"> Abs<br>
                             </div><br>
                         </div>
                     </div>
