@@ -12,6 +12,7 @@ class WorkoutController extends Controller
         return view('workouts.create');
     }
 
+
     public function generate(Request $request)
 {
     // Validate the request
@@ -24,6 +25,23 @@ class WorkoutController extends Controller
         'target_muscles' => 'required|array',
 
     ]);
+
+    //if value of target muscles is fullbody, then set target muscles to all target muscles
+    if($validatedData['target_muscles'][0] === 'full body'){
+        $validatedData['target_muscles'] = ['back', 'cardio', 'chest', 'lower arms', 'lower legs', 'shoulders', 'upper arms', 'upper legs','waist','neck'];
+    }
+
+    //same for available days
+    if($validatedData['available_days'][0] === 'all days'){
+        $validatedData['available_days'] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    }
+
+    //same for equipment
+    if($validatedData['equipment'][0] === 'all equipment'){
+        $validatedData['equipment'] = ['dumbbell', 'barbell', 'kettlebell', 'body weight', 'cable'];
+    }
+
+    //dd($validatedData);
 
     // Get the list of equipment
     $equipmentList = $validatedData['equipment'];
@@ -64,12 +82,14 @@ class WorkoutController extends Controller
             $workoutData = array_merge($workoutData, $decodedResponse);
         }
     }
+    //dd($validatedData);
     //filter exercises based where $target_muscles matches $decodedresponse['bodyPart']
     $filteredExercises = array_filter($workoutData, function ($exercise) use ($validatedData) {
         return in_array($exercise['bodyPart'], $validatedData['target_muscles']);
     });
 
     //dd($filteredExercises);
+    //dd($validatedData);
 
 
     //set volume of exercises per workout based on the user's fitness level
@@ -165,6 +185,8 @@ class WorkoutController extends Controller
         $splitDays = $splits[$splitChosen];
         $filteredExercises = [];
         for ($i = 0; $i < count($splitDays); $i++) {
+            //randomize the exercises
+            shuffle($workoutData);
             $filteredExercises[$splitDays[$i]] = array_filter($workoutData, function ($exercise) use ($splitTarget,$splitDays,$i) {
                 return in_array($exercise['target'], $splitTarget[$splitDays[$i]]);
             });
@@ -213,6 +235,8 @@ class WorkoutController extends Controller
         'reps' => $reps
     ]);
 }
+
+
 
 }
 
