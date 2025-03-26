@@ -64,8 +64,6 @@
 
     </div><br><br>
 
-    <h1 style="padding-bottom:100px">**RELOAD PAGE TO SHUFFLE EXERCISES**</h1>
-
     <h1 class="Title m-150">Generated Workout Plan:</h1>
     <div class="workout-container">
         @if(is_array($workoutData) && count($workoutData) > 0)
@@ -101,6 +99,13 @@
         @else
             <p>No workout plan available.</p>
         @endif
+    </div>
+    <div class="text-center mt-5 mb-5 pt-4">
+            <form action="{{ route('save.workout') }}" method="POST">
+                @csrf
+                <input type="hidden" name="workout_plan" value="{{ $workoutData ? json_encode($workoutData) : '{}' }}">
+                <button type="submit" class="btn btn-primary btn-lg px-5 py-3">Save Workout Plan</button>
+            </form>
     </div>
 </body>
 </html>
