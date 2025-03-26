@@ -25,7 +25,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //workout routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/workouts/create', [WorkoutController::class, 'show'])->name('generator.show');
+    Route::get('/userInfo/savedWorkouts', [WorkoutController::class, 'showSavedWorkouts'])->name('workouts.show');
     Route::post('/workouts/result', [WorkoutController::class, 'generate'])->name('generate.workout');
+    Route::post('/userInfo/savedWorkouts', [WorkoutController::class, 'saveWorkout'])->name('save.workout');
+    Route::get('/workouts/result', [WorkoutController::class, 'showResult'])->name('workouts.result');
 });
 
 
@@ -36,4 +39,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
