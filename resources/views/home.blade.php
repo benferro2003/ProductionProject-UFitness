@@ -25,14 +25,14 @@
             <div class = "graph-workouts">
                 <p class = "section-title">Workouts Per Week</p>
                 <p class = "section-title">workout progress placeholder</p>
-                <img src="{{ asset('graph.png') }}"class = "graph"> 
+                <img src="{{ asset('graph.png') }}"class = "img-fluid"> 
                 
 
             </div>
             <div class = "graph-goals">
                 <p class = "section-title">Weight progress</p>
                 <p class = "section-title">weight progress placeholder</p>
-                <img src="{{ asset('graph.png') }}"class = "graph"> 
+                <img src="{{ asset('graph.png') }}"class = "img-fluid"> 
             </div>
         </div>
     </main>
