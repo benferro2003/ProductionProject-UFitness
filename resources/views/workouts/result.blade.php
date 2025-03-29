@@ -64,48 +64,82 @@
 
     </div><br><br>
 
-    <h1 class="Title m-150">Generated Workout Plan:</h1>
+    <!-- DISPLAY USING BOOTSTRAP ACCORDIAN https://getbootstrap.com/docs/5.0/components/accordion/ -->
+    <h1 class="Title">Generated Workout Plan:</h1>
     <div class="workout-container">
         @if(is_array($workoutData) && count($workoutData) > 0)
-            @foreach($workoutData as $day => $exercises)
-                <div>
-                    <h2 class = "Title" style="align-content:left; margin-top: 50px;"><ul>{{ $day }}</ul></h2>
-                    <div class = "row"> 
-                        @foreach($exercises as $exercise)
-                            <div class="col-md-4">
-                                <div class="card mb-3" style="height:1300px; color: #34495e">
-                                    <div class="card-body">
-                                        <h2 class="card-title mt-20" style="font-weight:bold">{{ $exercise['name'] }}</h2><br>
-                                        <p class ="card-text"><strong>Sets:</strong> {{ $sets }}</p>
-                                        <p class ="card-text"><strong>Reps:</strong> {{ $reps }}</p>
-                                        <p class="card-text"><strong>Body Part:</strong> {{ $exercise['bodyPart'] }}</p>
-                                        <p class="card-text"><strong>Target Muscle:</strong> {{ $exercise['target'] }}</p>
-                                        <p class="card-text"><strong>Equipment:</strong> {{ $exercise['equipment'] }}</p>
-                                        <p class="card-text"><strong>Instructions:</strong></p>
-                                        <img src="{{ $exercise['gifUrl'] }}" class="card-img" style="width:fit-content; height: fit-content;" alt="Exercise image">
-                                        <ul>
-                                            @foreach($exercise['instructions'] as $instruction)
-                                                <li>{{ $instruction }}</li>
-                                            @endforeach
-                                        </ul>
-                                        
-                                    </div>
+            <!-- Use accordion to display workout data -->
+            <div class=accordion>
+                @php 
+                    //counter for day index
+                    $dayind = 0; 
+                @endphp
+                @foreach($workoutData as $day => $exercises)
+                    @php 
+                        //set day variable to day index
+                        $DAY = 'day' . $dayind; 
+                    @endphp
+                    <div class=accordion-item>
+                        <!-- Use day index to create unique id for each day -->
+                        <h2 class="accordion-header" id="heading{{ $DAY }}">
+                            <!-- use bootstrap accordion-button setting it as closed with collapsable elements-->
+                            <button class="accordion-button collapsed" 
+                                type="button" 
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse{{ $DAY }}" aria-expanded="false" aria-controls="collapse{{ $DAY }}">
+                                <!-- display day -->
+                                {{ $day }}
+                            </button>
+                        </h2>
+                        <!-- Collapsible content with each days related exercises  -->
+                        <div id="collapse{{ $DAY }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $DAY }}"
+                            data-bs-parent="#workoutAccordion">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    @foreach($exercises as $exercise)
+                                        <div class="col-md-4">
+                                            <div class="card mb-3" style="height:1300px; color: #34495e">
+                                                <div class="card-body">
+                                                    <h2 class="card-title mt-20" style="font-weight:bold">{{ $exercise['name'] }}
+                                                    </h2><br>
+                                                    <p class="card-text"><strong>Sets:</strong> {{ $sets }}</p>
+                                                    <p class="card-text"><strong>Reps:</strong> {{ $reps }}</p>
+                                                    <p class="card-text"><strong>Body Part:</strong> {{ $exercise['bodyPart'] }}</p>
+                                                    <p class="card-text"><strong>Target Muscle:</strong> {{ $exercise['target'] }}
+                                                    </p>
+                                                    <p class="card-text"><strong>Equipment:</strong> {{ $exercise['equipment'] }}
+                                                    </p>
+                                                    <p class="card-text"><strong>Instructions:</strong></p>
+                                                    <img src="{{ $exercise['gifUrl'] }}" class="img-fluid"
+                                                        style="width:fit-content; height: fit-content" alt="Exercise image">
+                                                    <ul>
+                                                        @foreach($exercise['instructions'] as $instruction)
+                                                            <li>{{ $instruction }}</li>
+                                                        @endforeach
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @php $dayind++; @endphp
+                                    @endforeach
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
         @else
             <p>No workout plan available.</p>
         @endif
+        </div>
     </div>
     <div class="text-center mt-5 mb-5 pt-4">
-            <form action="{{ route('save.workout') }}" method="POST">
-                @csrf
-                <input type="hidden" name="workout_plan" value="{{ $workoutData ? json_encode($workoutData) : '{}' }}">
-                <button type="submit" class="btn btn-primary btn-lg px-5 py-3">Save Workout Plan</button>
-            </form>
+        <form action="{{ route('save.workout') }}" method="POST">
+            @csrf
+            <input type="hidden" name="workout_plan" value="{{ $workoutData ? json_encode($workoutData) : '{}' }}">
+            <button type="submit" class="btn btn-primary btn-lg px-5 py-3">Save Workout Plan</button>
+        </form>
     </div>
 </body>
+
 </html>
