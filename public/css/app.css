@@ -1,6 +1,6 @@
 .Title {
     font-family: Impact, Charcoal, sans-serif;
-    font-size: 64px;
+    font-size: 40px;
     color: white;
     margin-left: 70px;
     margin-right: 70px;
@@ -51,6 +51,18 @@
     border-radius: 8px;
     padding: 30px;
 }
+
+.centre{
+    width: 90%;
+    background-color: #34495e;
+    border-radius: 8px;
+    padding: 50px;
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+
 
 .about-container{
     width: 40%;
@@ -135,4 +147,21 @@
     
 }
 
+.exercise-img {
+    max-width: 100%;
+    height: auto;
+}
 
+@media (max-width: 768px) {
+    .exercise-img {
+        max-width: 70%;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .exercise-img {
+        max-width: 50%;
+        height: auto;
+    }
+}
