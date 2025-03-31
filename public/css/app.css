@@ -151,11 +151,35 @@
     max-width: 100%;
     height: auto;
 }
+.centre-graph {
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
 
 @media (max-width: 768px) {
     .exercise-img {
         max-width: 70%;
         height: auto;
+    }
+
+    .centre-graph{
+        max-width: 70%;
+        height: auto;
+        margin: auto;
+    }
+    .wrapped-containers{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 50px auto;
+        max-width: 2000px;
+    }
+
+    .centre, .left, .right{
+        width: 80%;
+        margin-left: 40px;
+        margin: auto;
     }
 }
 
@@ -163,5 +187,24 @@
     .exercise-img {
         max-width: 50%;
         height: auto;
+    }
+
+    .centre-graph{
+        max-width: 50%;
+        height: auto;
+        margin: auto;
+    }
+
+    .wrapped-containers{
+        display: flex;
+        flex-direction:column;
+        justify-content: space-between;
+        margin: 50px auto;
+        max-width: 2000px;
+    }
+
+    .centre, .left, .right{
+        width: 80%;
+        margin:auto;
     }
 }
