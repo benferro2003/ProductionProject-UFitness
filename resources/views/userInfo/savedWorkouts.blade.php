@@ -19,10 +19,17 @@
             My Plans
         </h1>
 
-        @if(count($savedWorkouts) > 0)
+        @if ($savedWorkouts->isNotEmpty())
             @foreach($savedWorkouts as $workout)
                 @php
-                    $plan = json_decode($workout->workout_plan, true);
+                    if (is_array($workout->workout_plan)) 
+                    {
+                        $plan = $workout->workout_plan;
+                    } 
+                    else 
+                    {
+                        $plan = json_decode($workout->workout_plan, true);
+                    }
                     $workoutID = str_replace('-', '', $workout->created_at->format('d-m-y'));
                 @endphp
 
@@ -89,6 +96,7 @@
         </div>
                 </div>
             @endforeach
+
         @else
             <div class="text-center">
                 <p class="lead">You don't have any saved workouts yet.</p>
