@@ -11,4 +11,9 @@ class SavedWorkout extends Model
 
     protected $table = 'saved_workouts'; 
     protected $fillable = ['user_id', 'workout_plan']; 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
