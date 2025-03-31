@@ -32,8 +32,8 @@
                     <p class="section-title"> Log Progress</p>
                     <div class = wrapped-containers>
                         
-                    <a href="{{ route('generator.show') }}" class="btn btn-primary btn-lg btn-block left mt-5">Log Weight</a>
-                    <a href="{{ route('generator.show') }}" class="btn btn-primary btn-lg btn-block right mt-5">Track Activity</a>
+                    <a href="{{ route('activityLog.show') }}" class="btn btn-outline-light btn-lg btn-block left">Log Workout</a>
+                    <a href="{{ route('weightLog.show') }}" class="btn btn-outline-light btn-lg btn-block right">Log Weight</a>
                     </div>
                 </div>
 
