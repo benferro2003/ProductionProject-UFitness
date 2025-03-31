@@ -1,0 +1,8 @@
+<!-- https://www.w3schools.com/graphics/svg_text.asp used to help produce svg-->
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="50%" height="50%" fill="white"/>
+  <text x="150" y="100" font-family="Arial" font-size="14" fill="black" 
+        text-anchor="middle" dominant-baseline="middle">
+    Exercise Image Expired!
+  </text>
+</svg>
