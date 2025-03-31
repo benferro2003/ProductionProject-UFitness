@@ -277,17 +277,10 @@ class WorkoutController extends Controller
                 'workout_plan' => 'required|string',
             ]);
 
-            // Get authenticated user id
-            $userId = auth()->user()->id;
-
-            // Create a new SavedWorkout instance
-            $savedWorkout = new SavedWorkout();
-            $savedWorkout->user_id = $userId;
-            $savedWorkout->workout_plan = $validatedData['workout_plan'];
-
-            // Save workout plan to the database
-            $savedWorkout->save();
-
+            auth()->user()->savedWorkouts()->create([
+                'workout_plan' => json_encode($validatedData['workout_plan']),
+            ]);
+            
             // Return redirect with success
             return redirect()->route('workouts.show')->with('success', 'Workout plan saved successfully!');
 
@@ -303,14 +296,12 @@ class WorkoutController extends Controller
     //function to display contents of database
     public function showSavedWorkouts()
     {
-        // Get the authenticated user's id
-        $userId = auth()->user()->id;
-
+        $savedWorkouts = auth()->user()->savedWorkouts()->orderBy('created_at', 'desc')->get();
+        foreach ($savedWorkouts as $workout) {
+            $workout->workout_plan = json_decode($workout->workout_plan, true);
+        }
+        
         // Get the saved workouts for the authenticated user
-        $savedWorkouts = SavedWorkout::where('user_id', $userId)
-            ->orderBy('created_at', 'desc')
-            ->get();
-
         return view('userInfo.savedWorkouts', [
             'savedWorkouts' => $savedWorkouts,
         ]);
