@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\WorkoutController;
+use App\Http\Controllers\LogController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,6 +30,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/workouts/result', [WorkoutController::class, 'generate'])->name('generate.workout');
     Route::post('/userInfo/savedWorkouts', [WorkoutController::class, 'saveWorkout'])->name('save.workout');
     Route::get('/workouts/result', [WorkoutController::class, 'showResult'])->name('workouts.result');
+});
+
+//Log routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/Logs/activity-log', [LogController::class, 'showActivity'])->name('activityLog.show');
+    Route::get('/Logs/weight-log', [LogController::class, 'showWeight'])->name('weightLog.show');
 });
 
 
