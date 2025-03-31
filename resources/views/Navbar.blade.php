@@ -11,14 +11,14 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" style = "color: white" aria-current="page" href="/">Home</a>
+          <a class="nav-link active" style = "color: white; font-size: 30px;" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" style = "color: white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" style = "color: white; font-size: 30px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Calculators
           </a>
           <!--Drop down menu for calculators-->
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" style="font-size: 20px;">
             <!--When calculator clicked calculator controller function used -->
             <li><a class="dropdown-item" href="{{ route('calculator.show', 'calorie') }}">Calorie Calculator</a></li>
             <li><a class="dropdown-item" href="{{ route('calculator.show', 'one_rep_max') }}">1RM Calculator</a></li>
@@ -27,10 +27,10 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" style = "color: white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" style = "color: white; font-size: 30px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Workouts
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" style = "font-size: 20px;">
             <li><a class="dropdown-item" href="{{ route('workouts.show') }}">My Workouts</a></li>
             <li><a class="dropdown-item" href="{{ route('generator.show') }}">Workout Generator</a></li>
           </ul>
@@ -39,21 +39,21 @@
 
       <!--Right side of Nav Bar-->
       <!--Authentication allows users to login/register/log out -->
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto" style="font-size: 30px;">
         @auth
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" style="font-size: 30px;">
         <a class="nav-link dropdown-toggle" style = "color: white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="{{ asset('Dumbbell.png') }}" alt="Profile" width="40" height="40" class="rounded-circle">
+        <img src="{{ asset('Dumbbell.png') }}" alt="Profile" width="50" height="50" class="rounded-circle">
         {{ Auth::user()->name }}
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
         <li>
           <hr class="dropdown-divider">
         </li>
-        <li>
+        <li style="font-size: 20px;">
           <form method="POST" action="{{ route('logout') }}">
           @csrf
-          <button type="submit" class="dropdown-item">Logout</button>
+          <button type="submit" class="dropdown-item";">Logout</button>
           </form>
         </li>
         </ul>
