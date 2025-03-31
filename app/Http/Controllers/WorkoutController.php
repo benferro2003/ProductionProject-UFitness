@@ -277,7 +277,7 @@ class WorkoutController extends Controller
                 'workout_plan' => 'required|string',
             ]);
 
-            // Get the authenticated user's id
+            // Get authenticated user id
             $userId = auth()->user()->id;
 
             // Create a new SavedWorkout instance
@@ -285,14 +285,14 @@ class WorkoutController extends Controller
             $savedWorkout->user_id = $userId;
             $savedWorkout->workout_plan = $validatedData['workout_plan'];
 
-            // Save the workout plan to the database
+            // Save workout plan to the database
             $savedWorkout->save();
 
-            // Return redirect with success message
+            // Return redirect with success
             return redirect()->route('workouts.show')->with('success', 'Workout plan saved successfully!');
 
         } catch (\Exception $e) {
-            //if theres an error, log the error
+            //log error if saving workout fails
             \Log::error('Error saving workout: ' . $e->getMessage());
 
             // redirect back with error message
@@ -313,22 +313,6 @@ class WorkoutController extends Controller
 
         return view('userInfo.savedWorkouts', [
             'savedWorkouts' => $savedWorkouts,
-            //dd($savedWorkouts)
-            //dd output shows:
-                //#attributes: array:5 [▼
-            //"id" => 5
-            //"user_id" => "1"
-            //"workout_plan" => "{"Day 1 - UpperDay": [{"id": "0861", "name": "cable seated row", "gifUrl": "https://v2.exercisedb.io/image/eYMXG4a5f-VavI", "target": "upper back", "bodyPart":  ▶"
-            //"created_at" => "2025-03-23 15:24:25"
-            //"updated_at" => "2025-03-23 15:24:25"
-        //]
-        //#original: array:5 [▼
-           // "id" => 5
-            //"user_id" => "1"
-            //"workout_plan" => "{"Day 1 - UpperDay": [{"id": "0861", "name": "cable seated row", "gifUrl": "https://v2.exercisedb.io/image/eYMXG4a5f-VavI", "target": "upper back", "bodyPart":  ▶"
-            //"created_at" => "2025-03-23 15:24:25"
-            //"updated_at" => "2025-03-23 15:24:25"
-        //]
         ]);
     }
 

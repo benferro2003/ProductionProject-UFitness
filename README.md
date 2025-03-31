@@ -6,13 +6,13 @@ MOSCOW REQUIREMENTS:
 Project Expectations: 
  
 
-PHP framework installed 
+PHP framework installed - ${\color{blue}-- completed}$
 MUST 
 < 1 week 
 Install PHP framework such as Laravel to ensure ease of development with security features such as login authentication already implemented which allow for development time to be reduced, allowing for more advanced expectations to be met in less time. 
 
 
-Database 
+Database - ${\color{blue}-- completed}$
 MUST 
 2 weeks 
 The website will process and store user health data. Unlike name and email, storing values such as height, weight and age will be very sensitive and private for users, so it is essential that this data is held securely. An app that will use many database tables such as workout data, health data and personal data must ensure relationships between tables are as appropriate as possible to ensure with this sensitive data features have appropriate permissions to access different user data. 
@@ -20,13 +20,13 @@ The website will process and store user health data. Unlike name and email, stor
 
 
 
-Login System 
+Login System - ${\color{blue}-- completed}$
 MUST 
 < 1 week 
 Implement login system allowing users to register to and store their personal data. This expectation will be easily met with the use of a PHP framework such as Laravel – allowing more time coding features which are harder to implement. 
 
 
-User Interface  
+User Interface - ${\color{blue}-- completed}$
 MUST 
 2-3 Weeks 
 Creating an aesthetically pleasing user interface by: 
@@ -38,13 +38,13 @@ Ensure enough whitespace by spacing out features on the app to ensure features o
 Adaptability to different screens such as mobile screens and tablets. 
  
 
-Secure Web Forms 
+Secure Web Forms - ${\color{blue}-- completed}$
 MUST  
 2 weeks 
 To ensure features such as workout generator and calorie calculator can be implemented by adding secure web forms to allow for user data to be easily passed to the secured database –allowing for the necessary calculations needed for these features to also be inserted in a visually appealing and organized way. 
 
 
-UI accessible from different devices 
+UI accessible from different devices - ${\color{blue}-- completed}$
 SHOULD  
 2 weeks 
 Many people now are most likely using websites from mobile devices, tablets etc. rather than computers. By ensuring the app features are accessible from different devices, users will be more likely to use the app and engage with the features if the display is adjusted for different display sizes by changing the CSS of the website. 
