@@ -21,15 +21,13 @@
 
         <div class = "wrapped-containers">
             <div class = "left">
-                <p class = "section-title">Workouts Per Week</p>
-                <p class = "section-title">workout progress placeholder</p>
+                <p class = "section-title">Workouts Progress</p>
                 <img src="{{ asset('graph.png') }}"class = "img-fluid"> 
                 
 
             </div>
             <div class = "right">
                 <p class = "section-title">Weight progress</p>
-                <p class = "section-title">weight progress placeholder</p>
                 <img src="{{ asset('graph.png') }}"class = "img-fluid"> 
             </div>
         </div>
