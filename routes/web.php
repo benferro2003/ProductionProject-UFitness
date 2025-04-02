@@ -6,14 +6,11 @@ use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\LogController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [LogController::class, 'showLogs'])->name('home');
 
 //Dashboard route
-Route::get('/dashboard', function () {
-    return view('home');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [LogController::class, 'showLogs'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 //Calculator routes
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -36,6 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Logs/activity-log', [LogController::class, 'showActivity'])->name('activityLog.show');
     Route::get('/Logs/weight-log', [LogController::class, 'showWeight'])->name('weightLog.show');
+    Route::post('/Logs/activity-log', [LogController::class, 'logWorkout'])->name('log.workout');
+    Route::post('/Logs/weight-log', [LogController::class, 'logWeight'])->name('log.weight');
 });
 
 
