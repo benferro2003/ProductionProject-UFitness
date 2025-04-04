@@ -164,6 +164,18 @@
     margin-bottom: 20px;
 }
 
+.workoutGraph {
+    width: 600px;
+    height: auto;
+    margin: auto;
+}
+
+.weightGraph {
+    width: 600px;
+    height: auto;
+    margin: auto;
+}
+
 @media (max-width: 768px) {
     .exercise-img {
         max-width: 70%;
@@ -186,6 +198,18 @@
     .centre, .left, .right{
         width: 80%;
         margin-left: 40px;
+        margin: auto;
+    }
+    
+    .workoutGraph {
+        width: 80%;
+        height: auto;
+        margin: auto;
+    }
+
+    .weightGraph {
+        width: 80%;
+        height: auto;
         margin: auto;
     }
 }
@@ -213,5 +237,17 @@
     .centre, .left, .right{
         width: 80%;
         margin:auto;
+    }
+
+    .workoutGraph {
+        width: 70%;
+        height: auto;
+        margin: auto;
+    }
+
+    .weightGraph {
+        width: 70%;
+        height: auto;
+        margin: auto;
     }
 }
