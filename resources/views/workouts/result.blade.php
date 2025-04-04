@@ -98,7 +98,7 @@
                                                 <div class="row">
                                                     @foreach($exercises as $exercise)
                                                         <div class="col-md-4">
-                                                            <div class="card mb-3" style="height:2000px; color: #34495e">
+                                                            <div class="card mb-3" style="height:1600px; color: #34495e">
                                                                 <div class="card-body">
                                                                     <h2 class="card-title mt-20" style="font-weight:bold">
                                                                         {{ $exercise['name'] }}
