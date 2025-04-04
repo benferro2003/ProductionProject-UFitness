@@ -63,7 +63,6 @@
                                     <th scope="col">Workout Name</th>
                                     <th scope="col">Duration(Mins)</th>
                                     <th scope="col">Date (D/M/Y)</th>
-                                    <th scope="col">Total (# workouts)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,13 +71,13 @@
                                         <td>{{ $workout->workout_name }}</td>
                                         <td>{{ $workout->duration }}</td>
                                         <td>{{ $workout->created_at->format('d/m/y') }}</td>
-                                        <td>{{ $workout->id}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
+
 
                 <div class="right mt-5">
                     <p class="section-title">Weight progress</p>
@@ -89,7 +88,6 @@
                                     <th scope="col">Weight</th>
                                     <th scope="col">Goal</th>
                                     <th scope="col">Date</th>
-                                    <th scope="col">Progress</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -98,7 +96,6 @@
                                         <td>{{ $weight->weight }}</td>
                                         <td>{{ $weight->goal }}</td>
                                         <td>{{ $weight->created_at->format('d/m/y')}}</td>
-                                        <td>{{ $weight->id}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -106,6 +103,71 @@
                     </div>
                 </div>
             </div>
+
+            <!-- source used to create charts-->
+            <!-- w3schools.com/js/js_graphics_google_chart.asp-->
+            <div class="wrapped-containers">
+                <!-- Graphical output of workout progress using google charts -->
+                <div class="left mt-5">
+                    <p class="section-title">Activity</p>
+                    <div id="workoutChart" class = "workoutGraph">
+                        <script src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script>
+                            google.charts.load('current', { packages: ['corechart'] });
+                            google.charts.setOnLoadCallback(drawChart);
+                            function drawChart() {
+                                const data = google.visualization.arrayToDataTable([
+                                    ['Week', 'Workouts'],
+                                    @foreach ($workoutCount as $week => $count)
+                                    ['{{ $week }}', {{ $count }}],
+                                    @endforeach
+                                ]);
+
+                                const options = {
+                                     hAxis: {
+                                        title: 'Week'
+                                    }, vAxis: {
+                                        title: 'Frequency'
+                                    }, legend: 'none', backgroundColor: 'white', colors: ['#34495e']
+                                };
+
+                                const chart = new google.visualization.ColumnChart(document.getElementById('workoutChart'));
+                                chart.draw(data, options);
+                            }
+                        </script>
+                    </div>
+                </div>
+
+                <div class = "right mt-5">
+                    <p class="section-title">Weight Trend</p>
+                    <div id="weightChart" class = "weightGraph">
+                        <script src="https://www.gstatic.com/charts/loader.js"></script>
+                        <script>
+                            google.charts.load('current', { packages: ['corechart'] });
+                            google.charts.setOnLoadCallback(drawChart);
+                            function drawChart() {
+                                const data = google.visualization.arrayToDataTable([
+                                    ['Day(D/M)', 'Weight(KG)'],
+                                    @foreach ($loggedWeights as $weight)
+                                    ['{{$weight->created_at->format('d/m')}}', {{ $weight->weight }}],
+                                    @endforeach
+                                ]);
+
+                                const options = {
+                                     hAxis: {
+                                        title: 'Date (D/M)'
+                                    }, vAxis: {
+                                        title: 'Weight(KG)'
+                                    }, legend: 'none', backgroundColor: 'white', colors: ['#34495e']
+                                };
+                                const chart = new google.visualization.LineChart(document.getElementById('weightChart'));
+                                chart.draw(data, options);
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+
 
         </main>
 
