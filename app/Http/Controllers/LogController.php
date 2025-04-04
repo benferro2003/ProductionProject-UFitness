@@ -72,6 +72,9 @@ class LogController extends Controller
 
     public function showLogs()
     {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'You need to log in first.');
+        }
         $loggedWorkouts = auth()->user()->activityLogs()->orderBy('created_at', 'desc')->get();
         $loggedWeights = auth()->user()->weightLogs()->orderBy('created_at', 'desc')->get();
         return view('home', [

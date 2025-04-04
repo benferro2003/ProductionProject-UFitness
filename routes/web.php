@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LogController::class, 'showLogs'])->name('home');
 
 //Dashboard route
-Route::get('/dashboard', [LogController::class, 'showLogs'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [LogController::class, 'showLogs'])->name('dashboard');
 
 
 //Calculator routes
