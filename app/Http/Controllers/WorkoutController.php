@@ -307,6 +307,15 @@ class WorkoutController extends Controller
         ]);
     }
 
+    //function to delete workout from database
+    public function deletePlan($id)
+    {
+        $workout = SavedWorkout::findOrFail($id);
+        $workout->delete();
+
+        return redirect()->route('workouts.show')->with('success', 'Workout plan deleted successfully!');
+    }
+
 }
 
 
