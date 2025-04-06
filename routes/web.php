@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/workouts/result', [WorkoutController::class, 'generate'])->name('generate.workout');
     Route::post('/userInfo/savedWorkouts', [WorkoutController::class, 'saveWorkout'])->name('save.workout');
     Route::get('/workouts/result', [WorkoutController::class, 'showResult'])->name('workouts.result');
+    Route::delete('/userInfo/savedWorkouts/{id}', [WorkoutController::class, 'deletePlan'])->name('plan.delete');
 });
 
 //Log routes
