@@ -16,14 +16,14 @@
 <body class="background">
     <!-- display success and error messages -->
     @if(session('error'))
-        <div class="alert alert-danger text-center">
-            {{ session('error') }}
+        <div class="alert alert-warning text-center mt-5">
+            {!! session('error')!!}
         </div>
     @endif
 
     @if(session('success'))
-        <div class="alert alert-success text-center">
-            {{ session('success') }}
+        <div class="alert alert-info text-center mt-5">
+            {{ session('success')}}
         </div>
     @endif
     <x-layout>

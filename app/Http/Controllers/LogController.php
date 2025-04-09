@@ -48,20 +48,37 @@ class LogController extends Controller
         //weight converted to decimal
         $request->weight = floatval($validatedData['weight']);
 
-        //user can only log weight once a day
-        
-        //get the current user
-        $user = auth()->user();
-        //get the current date
-        $today = now()->toDateString();
-        
-        //check if the user has already logged their weight today
-        $currentLog = $user->weightLogs()->whereDate('created_at', $today)->first();
-
-        //if the user has already logged their weight today, return an error message
-        if ($currentLog) {
-            return redirect()->route('dashboard')->with('error', 'Daily weight log already exists, try again tomorrow');
+     
+        //user can only log weight once a week
+        $weekStart = now()->startOfWeek();
+        $weekEnd = now()->endOfWeek();
+        $weeklyLog = auth()->user()->weightLogs()
+            ->whereBetween('created_at', [$weekStart,$weekEnd]) ->first();
+        if ($weeklyLog) {
+            return redirect()->route('dashboard')->with('error', 'Weekly weight log already exists, try again next week');
         }
+
+        //sensitivity warning
+        //user's last weight log
+        $currentWeight = auth()->user()->weightLogs()->latest()->value('weight');
+        if ($currentWeight)
+        {
+            //use 2% of the current weight as the maximum difference weight can deviate in a week
+            $maxDifference = $currentWeight * 0.02; // 2% of the current weight
+            //calculate the difference between the current weight and the new weight
+            $difference = abs($currentWeight - $validatedData['weight']);
+            //if the difference is greater than the max difference
+            if($difference > $maxDifference)
+            {
+                //redirect to dashboard with sensitivity warning
+                return redirect()->route('dashboard')->with('error', '<b>Sensitivity Warning:<b><br>
+                Your logged weight is unsafe and will not be logged<br>
+                The safest maximum log would be to lose or gain:<br>' .round($maxDifference,2). ' kg
+                based on your current weight of ' . round($currentWeight,2) . ' kg');
+            }
+        }
+        
+
 
         auth()->user()->weightLogs()->create([
             'weight' => value($validatedData['weight']),
