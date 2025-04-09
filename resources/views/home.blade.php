@@ -155,9 +155,9 @@
 
                                 const options = {
                                      hAxis: {
-                                        title: 'Date (D/M)'
+                                        title: 'Weekly Log Date - dd/mm'
                                     }, vAxis: {
-                                        title: 'Weight(KG)'
+                                        title: 'Weekly Weight - KG'
                                     }, legend: 'none', backgroundColor: 'white', colors: ['#34495e']
                                 };
                                 const chart = new google.visualization.LineChart(document.getElementById('weightChart'));
