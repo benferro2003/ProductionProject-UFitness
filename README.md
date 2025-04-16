@@ -56,7 +56,7 @@ SHOULD
 With features being implemented such as the workout tracker (tracking number of workouts per week) and weight lost for example; This expectation can be met by implementing services such as an Iframe into the app to display this graphical data. This would allow users to see their progress in an easy-to-understand way – quantifying their progress. 
 
 
-Email Notifications - ${\color{green}-- not implemented}$
+Email Notifications - ${\color{blue}-- completed}$
 COULD  
 2 weeks 
 Write notification API code, will need to get user permissions to allow website to send notifications to user email. Notifications can improve engagement of the app- ensuring reminders to encourage users to use the app more regularly 
