@@ -1,8 +1,13 @@
 <?php
-
-use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
+use App\Console\Commands\SendLogReminder;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Artisan::command('reminder:log', function () {
+    $this->call(SendLogReminder::class);
+})->describe('Send a weekly log reminder to all users');
+
+Schedule::call(function () {
+    Artisan::call('reminder:log');  
+})->weeklyOn(1, '10:00') 
+  ->timezone('Europe/London');
