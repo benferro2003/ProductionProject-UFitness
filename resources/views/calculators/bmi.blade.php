@@ -28,11 +28,16 @@
             @csrf
 
             <label for="Weight">Weight (In kg)</label>
-            <input type="text" name="weight" id="weight" class="form-control" required>
+            <input type="text" name="weight" id="weight" class="form-control" value="{{ old(key: 'weight') }}" required>
+            @error('weight')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
             <label for="Height">Height (In cm)</label>
-            <input type="text" name="height" id="height" class="form-control" required>
-
+            <input type="text" name="height" id="height" class="form-control" value="{{ old(key: 'height') }}" required>
+            @error('height')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
             <br>
 

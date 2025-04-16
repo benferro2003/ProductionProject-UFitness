@@ -27,12 +27,16 @@
           <form action="{{ route('calculator.calculate', 'one_rep_max') }}" method="POST">
             @csrf
             <label for="max_weight">Weight (In kg)</label>
-            <input type="text" name="max_weight" id="max_weight" class="form-control" required>
+            <input type="text" name="max_weight" id="max_weight" class="form-control" value="{{ old('max_weight') }}" required>
+            @error('max_weight')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
             <label for="reps">Number of Repetitions</label>
-            <input type="text" name="reps" id="reps" class="form-control" required>
-
-
+            <input type="text" name="reps" id="reps" class="form-control" value="{{ old(key: 'reps') }}" required>
+            @error('reps')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <br>
 
             <button type="submit" class="btn btn-primary">Calculate</button>

@@ -22,26 +22,38 @@
                     <form action="{{ route('calculator.calculate', 'calorie') }}" method="POST">
                         @csrf
                         <label for="age">Age (18-50)</label>
-                        <input type="text" name="age" id="age" class="form-control" required>
+                        <input type="text" name="age" id="age" class="form-control" value="{{ old('age') }}" required>
+                        @error('age')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 
                         <div class="form-group">
                             <label for="sex">Sex</label>
-                            <select class="form-control" name="sex" id="sex" required>
+                            <select class="form-control" name="sex" id="sex" value="{{ old('sex') }}"required>
                                 <option value="" disabled selected>sex</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
+                            @error('sex')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <label for="weight">Weight (In kg)</label>
-                        <input type="text" name="weight" id="weight" class="form-control" required>
+                        <input type="text" name="weight" id="weight" class="form-control" value="{{ old('weight') }}" required>
+                        @error('weight')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 
                         <label for="height">Height (In cm)</label>
-                        <input type="text" name="height" id="height" class="form-control" required>
+                        <input type="text" name="height" id="height" class="form-control" value="{{ old('height') }}"required>
+                        @error('height')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 
                         <div class="form-group">
                             <label for="activity">Activity Level</label>
-                            <select class="form-control" name="activity" id="activity" required>
+                            <select class="form-control" name="activity" id="activity" value="{{ old('activity') }}"required>
                                 <option value="" disabled selected>activity level</option>
                                 <option value="bmr">Basal Metabolic Rate (BMR)</option>
                                 <option value="sedentary">Sedentary: Little / no exercise</option>
@@ -50,6 +62,9 @@
                                 <option value="active">Active: daily exercise or intense exercise 1-3 times per week</option>
                                 <option value="very_active">Very Active: intense exercise 6-7 times per week</option>
                             </select>
+                            @error('activity')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div><br>
 
                         <button type="submit" class="btn btn-primary">Calculate</button>
