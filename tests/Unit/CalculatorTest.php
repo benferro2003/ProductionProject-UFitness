@@ -11,9 +11,9 @@ class CalculatorTest extends TestCase
     //test function to test valid calorie data
     public function testValidCalorieData()
     {
-        $weight = 83;
-        $height = 165;
-        $age = 21;
+        $weight = '83';
+        $height = '165';
+        $age = '21';
         $activity = 'active';
         $sex = 'male';
         $result = $this

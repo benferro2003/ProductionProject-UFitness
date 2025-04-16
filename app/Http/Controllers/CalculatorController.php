@@ -43,7 +43,6 @@ class CalculatorController extends Controller
                 'sex' => 'required|in:male,female',
                 'activity' => 'required',
             ]);
-
             $age = $request->input('age');
             $weight = $request->input('weight');
             $height = $request->input('height');
