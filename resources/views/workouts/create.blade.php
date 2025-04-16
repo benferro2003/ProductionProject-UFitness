@@ -36,6 +36,9 @@
                                 <input type="checkbox" name="available_days[]" value="Fri"> Friday<br>
                                 <input type="checkbox" name="available_days[]" value="Sat"> Saturday<br>
                                 <input type="checkbox" name="available_days[]" value="Sun"> Sunday<br>
+                                @error('available_days')
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                @enderror
                             </div><br>
 
                             <div class="form-control-lg">
@@ -46,15 +49,22 @@
                                 <input type="checkbox" name="equipment[]" value="kettlebell"> Kettlebell<br>
                                 <input type="checkbox" name="equipment[]" value="body weight"> BodyWeight<br>
                                 <input type="checkbox" name="equipment[]" value="cable"> Cables<br>
+                                @error('equipment')
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                @enderror
                             </div><br>
 
                             <div class="form-control-lg">
                                 <label class = "form-label fw-bold" for="fitness_level">Desired Difficulty:</label required><br>
                                 <select  class = "form-select" name="fitness_level" id="fitness_level">
+                                <option value="" disabled selected>Fitness Level</option>
                                     <option value="Beginner">Beginner</option><br>
                                     <option value="Intermediate">Intermediate</option><br>
                                     <option value="Advanced">Advanced</option><br>
                                 </select>
+                                @error('fitness_level')
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                @enderror
                             </div><br>
                         </div>
 
@@ -64,6 +74,9 @@
                                 <input type="radio" name="training_goal" value="strength">  Strength training<br>
                                 <input type="radio" name="training_goal" value="hypertrophy">   Muscle growth<br>
                                 <input type="radio" name="training_goal" value="endurance"> Endurance training<br>
+                                @error('training_goal')
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                @enderror
                             </div><br>
 
                             <div class="form-control-lg">
@@ -71,6 +84,9 @@
                                 <input type="radio" name="workout_split" value="FullBody">   Full Body (best for beginner lifters)<br>
                                 <input type="radio" name="workout_split" value="PPL">   Push Pull legs (best for Intermediate lifters)<br>
                                 <input type="radio" name="workout_split" value="UpperLower">   Upper Lower (best for Advanced lifters)<br>
+                                @error('workout_split')
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                @enderror
                             </div><br>
 
                             <div class="form-control-lg">
@@ -86,6 +102,9 @@
                                 <input type="checkbox" name="target_muscles[]" value = "upper arms"> upper arms<br>
                                 <input type="checkbox" name="target_muscles[]" value = "upper legs"> upper legs<br>
                                 <input type="checkbox" name="target_muscles[]" value = "waist"> Abs<br>
+                                @error('target_muscles')
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                @enderror
                             </div><br>
                         </div>
                     </div>
