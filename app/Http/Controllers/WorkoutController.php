@@ -149,9 +149,9 @@ class WorkoutController extends Controller
             if ($split) {
                 return $split;
             } else {
-                if ($totalDays <= 2) {
+                if ($totalDays <= 3) {
                     return 'FullBody';
-                } elseif ($totalDays <= 3) {
+                } elseif ($totalDays <= 4) {
                     return 'UpperLower';
                 } else {
                     return 'PPL';
@@ -218,20 +218,6 @@ class WorkoutController extends Controller
             'sets' => $sets,
             'reps' => $reps,
         ]);
-
-
-
-        //dd($workoutData);
-        //return workout result view
-        //return view('workouts.result', [
-        //'workoutPlan' => $validatedData,
-        //'workoutData' => $plan,
-        //'sets' => $sets,
-        //'reps' => $reps
-        //]);
-        //use dd to see if session variables set correctly
-        //dd(session('workoutData'));
-
 
         return redirect()->route('workouts.result');
     }

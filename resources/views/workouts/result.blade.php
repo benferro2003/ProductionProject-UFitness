@@ -16,8 +16,6 @@
 <body class="background">
     <h1 class="Title">Results</h1>
     <div class="wrapped-containers">
-
-
         <div class="left">
             <h3>Your Available Days:</h3>
             <ul>
@@ -49,7 +47,11 @@
 
             <h3>Your Preffered split</h3>
             <ul>
-                <li>{{ $workoutPlan['workout_split'] }}</li>
+                @if(!isset($workoutPlan['workout_split']) || empty($workoutPlan['workout_split']))
+                    <li>No Choice</li>
+                @else
+                    <li>{{ $workoutPlan['workout_split'] }}</li>
+                @endif
             </ul>
 
 
