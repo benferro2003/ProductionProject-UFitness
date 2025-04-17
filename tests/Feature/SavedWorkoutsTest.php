@@ -19,36 +19,22 @@ class SavedWorkoutsTest extends TestCase
         // created mock workout plan similar to format in db
         $mockWorkoutPlan = [
             "Day 1 - Push" => [
-                [
-                    "bodyPart" => "chest",
+                [  "bodyPart" => "chest",
                     "equipment" => "barbell",
                     "gifUrl" => "https://v2.exercisedb.io/image/Q98AcyRhQY6nu1",
                     "id" => "0033",
                     "name" => "barbell decline bench press",
                     "target" => "pectorals",
                     "secondaryMuscles" => ["triceps", "shoulders"],
-                    "instructions" => [
-                        "Lie on a decline bench with your feet secured and your head lower than your hips.",
-                        "Grasp the barbell with an overhand grip slightly wider than shoulder-width apart.",
-                        "Unrack the barbell and lower it slowly towards your chest, keeping your elbows tucked in.",
-                        "Pause for a moment at the bottom, then push the barbell back up to the starting position.",
-                        "Repeat for the desired number of repetitions."
-                    ]
-                ],
-            ]
-        ];
-
+                    "instructions" => ["Lie on a decline bench "]],
+            ]];
         //encoded mock workout plan to JSON format
         $mockPlan = json_encode($mockWorkoutPlan);
-
         //simulate a post request to the save workout route
-        $response = $this->post(route('save.workout'), [
-            'workout_plan' => $mockPlan,
-        ]);
-
+        $response = $this->post(route('save.workout'),
+         ['workout_plan' => $mockPlan,]);
         //ensured response is redirect to the saved workouts page
         $response->assertRedirect(route('workouts.show'));
-
         //asserted that the workout plan was saved in the database
         $this->assertDatabaseHas('saved_workouts', [
             'user_id' => $user->id,
@@ -69,4 +55,20 @@ class SavedWorkoutsTest extends TestCase
     
         $response->assertSessionHasErrors(['workout_plan']);
     }
+
+    //test only authenticated users can save workouts
+    public function testUnAuthenticatedUserCannotSaveWorkout()
+    {
+        //response is not authenticated
+        $response = $this->post(route('save.workout'), [
+            'workout_plan' => 'WorkoutPlan',
+        ]);
+    
+        //asserted that the user is redirected to the login page
+        $response->assertRedirect(route('login'));
+    }
+
+
+
+
 }
