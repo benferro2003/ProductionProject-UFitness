@@ -36,7 +36,8 @@
                         The application also provides users with a variety of tools such as calculators and workout
                         generators to help them achieve their fitness goals.
                         Whether you are a beginner looking to get started or an experienced athlete looking to take your
-                        training to the next level, UFIT has something for everyone.</p>
+                        training to the next level, UFIT has something for everyone.
+                    </p>
                 </div>
 
                 <div class="right mt-5">
