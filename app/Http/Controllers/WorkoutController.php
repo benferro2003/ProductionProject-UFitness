@@ -257,26 +257,17 @@ class WorkoutController extends Controller
     //function to save workout to database
     public function saveWorkout(Request $request)
     {
-        try {
-            // Validate data from request
-            $validatedData = $request->validate([
-                'workout_plan' => 'required|string',
-            ]);
+        // Validate data from request
+        $validatedData = $request->validate([
+            'workout_plan' => 'required|string|min:3',
+        ]);
 
-            auth()->user()->savedWorkouts()->create([
-                'workout_plan' => json_encode($validatedData['workout_plan']),
-            ]);
-            
-            // Return redirect with success
-            return redirect()->route('workouts.show')->with('success', 'Workout plan saved successfully!');
-
-        } catch (\Exception $e) {
-            //log error if saving workout fails
-            \Log::error('Error saving workout: ' . $e->getMessage());
-
-            // redirect back with error message
-            return redirect()->back()->with('error', 'Failed to save workout plan: ' . $e->getMessage());
-        }
+        auth()->user()->savedWorkouts()->create([
+            'workout_plan' => json_encode($validatedData['workout_plan']),
+        ]);
+        
+        // Return redirect with success
+        return redirect()->route('workouts.show')->with('success', 'Workout plan saved successfully!');
     }
 
     //function to display contents of database
