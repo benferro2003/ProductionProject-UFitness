@@ -32,11 +32,17 @@
                             <option value="upper">Upper Body</option>
                             <option value="lower">Lower Body</option>
                         </select>
+                        @error('workout_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                     </div>
 
                     <div class="form-control-lg">
                         <label class = "form-label fw-bold" for="duration">Duration (In minutes) :</label>
-                        <input type="text" class="form-control" name="duration" id="duration" required>
+                        <input type="text" class="form-control" name="duration" id="duration" value="{{ old(key: 'duration')}}" required>
+                        @error('duration')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div><br>
 
                     <div class="text-center mt-4">

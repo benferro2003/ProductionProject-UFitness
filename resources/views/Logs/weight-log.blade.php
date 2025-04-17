@@ -22,15 +22,22 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="form-control-lg">
                         <label class="form-label fw-bold" for="weight">Weight (In kg) :</label>
-                        <input type="text" class="form-control" name="weight" id="weight" required>
+                        <input type="text" class="form-control" name="weight" id="weight" value="{{ old('weight') }}" required>
+                        @error('weight')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div><br>
                     <div class="form-control-lg">
                         <label class="form-label fw-bold" for="weight_goal">Goal :</label>
                         <select class="form-select" name="weight_goal" id="weight_goal">
+                            <option value="" disabled selected>Select your goal</option>
                             <option value="loss">Weight Loss</option>
                             <option value="gain">Weight Gain</option>
                             <option value="maintain">Maintain Weight</option>
                         </select>
+                        @error('weight_goal')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="text-center mt-4">

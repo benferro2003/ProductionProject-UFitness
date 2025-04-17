@@ -24,7 +24,7 @@ class LogController extends Controller
     {
         $validatedData = $request->validate([
             'workout_name' => 'required|string',
-            'duration' => 'required|string',
+            'duration' => 'required|numeric|min:1|max:240',
         ]);
 
         //duration converted to int
@@ -41,7 +41,7 @@ class LogController extends Controller
     public function logWeight(Request $request)
     {
         $validatedData = $request->validate([
-            'weight' => 'required|string',
+            'weight' => 'required|numeric|min:30|max:500',
             'weight_goal' => 'required|string',
         ]);
 
