@@ -107,41 +107,49 @@
 
             <!-- source used to create charts-->
             <!-- w3schools.com/js/js_graphics_google_chart.asp-->
+            <!-- only show graphs if workoutCount exists -->
+            @if($workoutCount->isEmpty() && $loggedWeights->isEmpty())
+            @else
             <div class="wrapped-containers">
                 <!-- Graphical output of workout progress using google charts -->
                 <div class="left mt-5">
-                    <p class="section-title">Activity</p>
-                    <div id="workoutChart" class = "workoutGraph">
-                        <script src="https://www.gstatic.com/charts/loader.js"></script>
-                        <script>
-                            google.charts.load('current', { packages: ['corechart'] });
-                            google.charts.setOnLoadCallback(drawChart);
-                            function drawChart() {
-                                const data = google.visualization.arrayToDataTable([
-                                    ['Week', 'Workouts'],
-                                    @foreach ($workoutCount as $week => $count)
-                                    ['{{ $week }}', {{ $count }}],
-                                    @endforeach
-                                ]);
+                    @if($workoutCount->isEmpty())
+                    @elseif($workoutCount->isNotEmpty())
+                            <p class="section-title">Activity</p>
+                            <div id="workoutChart" class="workoutGraph">
+                                <script src="https://www.gstatic.com/charts/loader.js"></script>
+                                <script>
+                                    google.charts.load('current', { packages: ['corechart'] });
+                                    google.charts.setOnLoadCallback(drawChart);
+                                    function drawChart() {
+                                        const data = google.visualization.arrayToDataTable([
+                                            ['Week', 'Workouts'],
+                                            @foreach ($workoutCount as $week => $count)
+                                                ['{{ $week }}', {{ $count }}],
+                                            @endforeach
+                                        ]);
 
-                                const options = {
-                                     hAxis: {
-                                        title: 'Week'
-                                    }, vAxis: {
-                                        title: 'Frequency'
-                                    }, legend: 'none', backgroundColor: 'white', colors: ['#34495e']
-                                };
+                                        const options = {
+                                            hAxis: {
+                                                title: 'Week'
+                                            }, vAxis: {
+                                                title: 'Frequency'
+                                            }, legend: 'none', backgroundColor: 'white', colors: ['#34495e']
+                                        };
 
-                                const chart = new google.visualization.ColumnChart(document.getElementById('workoutChart'));
-                                chart.draw(data, options);
-                            }
-                        </script>
-                    </div>
-                </div>
+                                        const chart = new google.visualization.ColumnChart(document.getElementById('workoutChart'));
+                                        chart.draw(data, options);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    @endif
 
-                <div class = "right mt-5">
+                <div class="right mt-5">
+                    @if($loggedWeights->isEmpty())
+                    @elseif($loggedWeights->isNotEmpty())
                     <p class="section-title">Weight Trend</p>
-                    <div id="weightChart" class = "weightGraph">
+                    <div id="weightChart" class="weightGraph">
                         <script src="https://www.gstatic.com/charts/loader.js"></script>
                         <script>
                             google.charts.load('current', { packages: ['corechart'] });
@@ -150,12 +158,12 @@
                                 const data = google.visualization.arrayToDataTable([
                                     ['Day(D/M)', 'Weight(KG)'],
                                     @foreach ($loggedWeights as $weight)
-                                    ['{{$weight->created_at->format('d/m')}}', {{ $weight->weight }}],
+                                        ['{{$weight->created_at->format('d/m')}}', {{ $weight->weight }}],
                                     @endforeach
                                 ]);
 
                                 const options = {
-                                     hAxis: {
+                                    hAxis: {
                                         title: 'Weekly Log Date - dd/mm'
                                     }, vAxis: {
                                         title: 'Weekly Weight - KG'
@@ -166,8 +174,10 @@
                             }
                         </script>
                     </div>
+                    @endif
                 </div>
             </div>
+            @endif
 
 
         </main>
