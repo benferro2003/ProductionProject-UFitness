@@ -44,7 +44,7 @@
       <li class="nav-item dropdown" style="font-size: 30px;">
         <a class="nav-link dropdown-toggle" style = "color: white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="{{ asset('Dumbbell.png') }}" alt="Profile" width="50" height="50" class="rounded-circle">
-        {{ Auth::user()->name }}
+        {{ Str::ucfirst(Str::lower(Str::substr(Auth::user()->name, 0))) }}
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
         <li>
