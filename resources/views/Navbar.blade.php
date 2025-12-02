@@ -1,10 +1,12 @@
 <!-- Navbar - code from bootstrap -->
 <!-- link - https://getbootstrap.com/docs/4.0/components/navbar/ -->
-<nav class="navbar navbar-expand-lg custom-nav" >
+<br>
+<div class = "container">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <!--Show logo in Nav Bar -->
     <img src="{{ asset('Dumbbell.png') }}" width="100" height="100" alt="Logo" class="navbar-brand">
-    <button style="background-color: white;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+    <button style="background-color: #34495e; box-shadow: 2px 2px;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -71,3 +73,5 @@
     </div>
   </div>
 </nav>
+<br>
+</div>
