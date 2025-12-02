@@ -103,7 +103,10 @@
 
 .custom-nav{
     background-color: #2c3e50;
-    color:white
+    border-bottom: 1px solid white;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    margin-bottom: 1em;
 }
 
 /** Custom css for section title e.g. graph, about */

@@ -1,11 +1,9 @@
 <!-- Navbar - code from bootstrap -->
 <!-- link - https://getbootstrap.com/docs/4.0/components/navbar/ -->
-<br>
-<div class = "container">
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg custom-nav">
+  <div class = "container">
   <div class="container-fluid">
     <!--Show logo in Nav Bar -->
-    <img src="{{ asset('Dumbbell.png') }}" width="100" height="100" alt="Logo" class="navbar-brand">
     <button style="background-color: #34495e; box-shadow: 2px 2px;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" style = "color: white; font-size: 30px;" aria-current="page" href="/">Home</a>
+          <a class="nav-link active" style = "color: white; font-size: 30px;" aria-current="page" href="/">UFIT</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" style = "color: white; font-size: 30px;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,6 +70,7 @@
 
     </div>
   </div>
+  </div>
 </nav>
 <br>
-</div>
+
