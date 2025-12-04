@@ -8,24 +8,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 
-Route::get('/run-migrations-once', function () {
-    // Run migrations
-    Artisan::call('migrate', ['--force' => true]);
-    
-    // Path to this file
-    $routesFile = base_path('routes/web.php');
-    
-    // Remove the route from this file
-    $routeSignature = "Route::get('/run-migrations-once'";
-    $contents = File::get($routesFile);
-    
-    // Delete the line containing the route
-    $newContents = preg_replace('/Route::get\(\'\/run\-migrations\-once\'[\s\S]*?\);\n?/', '', $contents, 1);
-
-    File::put($routesFile, $newContents);
-
-    return "Migrations completed and route deleted.";
-});
 
 Route::get('/', [LogController::class, 'showLogs'])->name('home');
 
