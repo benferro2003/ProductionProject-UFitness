@@ -130,8 +130,8 @@ input:focus, select:focus, textarea:focus {
 .hero-title {
     font-size: 3rem;
     font-weight: 800;
-    background: linear-gradient(90deg, #1d2733, #405164);
-    -webkit-background-clip: text;
+    background: linear-gradient(90deg, #1d2733, #405164); 
+    background-clip: text;
     color: transparent !important;
     margin-bottom: 12px;
 }

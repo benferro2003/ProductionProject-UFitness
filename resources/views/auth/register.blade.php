@@ -5,6 +5,7 @@
     {{-- LEFT HERO SECTION (same as login) --}}
     <div class="auth-left">
         <div class="auth-left-inner">
+            <img src="/images/ufit-logo.svg" class="banner-icon" alt="UFIT Logo">
             <h1 class="auth-title">Join UFIT</h1>
 
             <p class="auth-subtitle">
