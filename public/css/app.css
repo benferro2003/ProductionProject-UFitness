@@ -1,256 +1,157 @@
-.Title {
-    font-family: Impact, Charcoal, sans-serif;
-    font-size: 40px;
-    color: white;
-    margin-left: 70px;
-    margin-right: 70px;
-    text-shadow: 2px 2px 4px black;
-    color: white;
-    text-align:center;
-    background-color: #34495e;
-    border-radius: 8px;
-    padding: 60px 20px;
-}
-
-.form-container{
-    width: 90%;
-    margin-left: 65px;
-    margin-right: 70px;
-    background-color: #34495e;
-    border-radius: 8px;
-    padding: 30px;
-    text-align: center;
-}
-
-.wrapped-containers{
-    display: flex;
-    justify-content: space-between;
-    margin: 50px auto;
-    max-width: 2000px;
-
-}
-
-.card{
-    min-height: 100v;
-    width: 100%;
-    margin-top: 50px;
-    margin-left: 0px;
-    margin-bottom: 50px;
-    padding: 20px;
-}
-
-.form-containers{
-    display: flex;
-    justify-content: space-between;
-    margin: 50px auto;
-    max-width: 2000px;
-}
-.left,.right{
-    width: 48%;
-    background-color: #34495e;
-    border-radius: 8px;
-    padding: 30px;
-}
-
-.centre{
-    width: 90%;
-    background-color: #34495e;
-    border-radius: 8px;
-    padding: 50px;
-    text-align: center;
-    justify-content: center;
-    margin: 0 auto;
-}
-
-
-
-.about-container{
-    width: 40%;
-    margin-top: 50px;
-    margin-left: 70px;
-    background-color: #34495e;
-    border-radius: 8px;
-    padding: 30px;
-}
-.left-container,
-.right-container{
-    margin-left: 70px;
-    width: 38%;
-    background-color: #34495e;
-    border-radius: 8px;
-    padding: 30px;
-}
-
-.workout-container{
-    width: 90%;
-    margin-top: 50px;
-    margin-left: 70px;
-    background-color: #34495e;
-    border-radius: 8px;
-    padding: 30px;
-}
-.about-text{
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.background {
+/* -------------------------
+   GLOBAL / BASE STYLES
+-------------------------- */
+body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     background-color: #2c3e50;
-    color: white;
+    color: #ecf0f1;
+    line-height: 1.6;
 }
 
-.custom-nav{
-    background-color: #2c3e50;
-    border-bottom: 1px solid white;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    margin-bottom: 1em;
+.container {
+    width: min(1200px, 90%);
+    margin: auto;
 }
 
-/** Custom css for section title e.g. graph, about */
-.section-title{
-    font-family: Impact, Charcoal, sans-serif;
-    font-size: 1.8rem;
-    font-display: block;
-    color: White;
+/* Cleaner section spacing */
+.section {
+    margin-top: 100px;
+    margin-bottom: 80px;
+}
+
+/* -------------------------
+   TITLES & TEXT
+-------------------------- */
+.section-title, .Title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 25px;
     padding: 20px;
-    text-align:center;
-    border-radius: 8px;
+    color: #ffffff;
 }
 
-/** Custom css for graph */
-.graph-workouts{
-    width: 40%;
-    margin-top: 50px;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 50px;
-    background-color: #34495e;
-    border-radius: 8px;
-    ;
-}
-/** opposite side to workout graph */
-.graph-goals{
-    width: 40%;
-    margin-top: 50px;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 50px;
-    background-color: #34495e;
-    border-radius: 8px;
-    padding-bottom: 20px;
-
+/* Subtitle text */
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.85;
 }
 
-.graph{
-    width:500px; height: 500px;
-    margin-left: 40px;
-    
+/* -------------------------
+   CARDS / PANELS
+-------------------------- */
+.card, 
+.panel {
+    background: #34495e;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.exercise-img {
-    max-width: 100%;
-    height: auto;
-}
-.centre-graph {
-    max-width: 100%;
-    height: auto;
-    margin: auto;
+/* Hover effect = instantly more modern */
+.card:hover, .panel:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
+/* -------------------------
+   FLEX LAYOUTS
+-------------------------- */
+.flex {
+    display: flex;
+    gap: 30px;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 50/50 layout */
+.col-50 {
+    flex: 1;
+    min-width: 350px;
+}
+
+/* -------------------------
+   HOME PAGE HERO
+-------------------------- */
+.hero {
+    background: #34495e;
+    padding: 80px 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.hero-icon {
+    height: 80px;
+    margin: 10px 0;
+}
+
+/* -------------------------
+   IMAGES
+-------------------------- */
+.responsive-img {
     width: 100%;
-    margin-bottom: 20px;
+    max-width: 400px;
+    border-radius: 8px;
 }
 
-.workoutGraph {
-    width: 600px;
-    height: auto;
-    margin: auto;
+/* -------------------------
+   NAVIGATION
+-------------------------- */
+.custom-nav {
+    background-color: #1f2c38;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
-.weightGraph {
-    width: 600px;
-    height: auto;
-    margin: auto;
+/* -------------------------
+   FOOTER
+-------------------------- */
+.footer {
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    margin-top: 60px;
+    opacity: 0.6;
 }
 
+/* -------------------------
+   MOBILE RESPONSIVE
+-------------------------- */
 @media (max-width: 768px) {
-    .exercise-img {
-        max-width: 70%;
-        height: auto;
-    }
 
-    .centre-graph{
-        max-width: 70%;
-        height: auto;
-        margin: auto;
-    }
-    .wrapped-containers{
-        display: flex;
+    .flex {
         flex-direction: column;
-        justify-content: space-between;
-        margin: 50px auto;
-        max-width: 2000px;
+        gap: 20px;
     }
 
-    .centre, .left, .right{
-        width: 80%;
-        margin-left: 40px;
-        margin: auto;
-    }
-    
-    .workoutGraph {
-        width: 80%;
-        height: auto;
-        margin: auto;
+    .hero-title {
+        font-size: 2.2rem;
     }
 
-    .weightGraph {
-        width: 80%;
-        height: auto;
-        margin: auto;
-    }
-}
-
-@media (max-width: 480px) {
-    .exercise-img {
-        max-width: 50%;
-        height: auto;
+    .section-title {
+        font-size: 1.6rem;
     }
 
-    .centre-graph{
-        max-width: 50%;
-        height: auto;
-        margin: auto;
-    }
-
-    .wrapped-containers{
-        display: flex;
-        flex-direction:column;
-        justify-content: space-between;
-        margin: 50px auto;
-        max-width: 2000px;
-    }
-
-    .centre, .left, .right{
-        width: 80%;
-        margin:auto;
-    }
-
-    .workoutGraph {
-        width: 70%;
-        height: auto;
-        margin: auto;
-    }
-
-    .weightGraph {
-        width: 70%;
-        height: auto;
-        margin: auto;
+    .card, .panel {
+        padding: 20px;
     }
 }
