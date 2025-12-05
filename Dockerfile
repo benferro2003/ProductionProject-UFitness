@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libonig-dev \
     libpq-dev \
+    nodejs \
+    npm \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql
 
@@ -26,7 +28,11 @@ COPY . .
 # Install Laravel dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Laravel storage linking (important on container)
+# Install & build frontend assets
+RUN npm install
+RUN npm run build
+
+# Ensure storage link
 RUN php artisan storage:link || true
 
 # Expose port
@@ -34,4 +40,3 @@ EXPOSE 8000
 
 # Start Laravel server
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
-
