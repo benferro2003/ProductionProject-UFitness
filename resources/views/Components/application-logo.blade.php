@@ -1,3 +1,3 @@
 <svg viewBox="0 0 316 316" xmlns="http://www.w3.org/2000/svg" {{ $attributes }}>
-    <img src="{{ asset('Dumbbell.png') }}" alt="Profile" width="200" height="200" class="rounded-circle">
+    <img src="/images/ufit-logo.svg" class="hero-icon" alt="UFIT Logo">
 </svg>

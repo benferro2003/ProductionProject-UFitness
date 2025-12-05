@@ -11,20 +11,34 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
+        <!-- CSS / JS -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
-    <body class="font-sans text-white-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0" style="background-color: #2c3e50;">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-white-500" />
-                </a>
-            </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+    <body class="font-sans antialiased" style="background-color: #f5f7fa;">
+
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-8">
+
+            <!-- Panel wrapper -->
+            {{-- Detect if the slot contains an auth-container --}}
+@php
+    $isAuthPage = Str::contains($slot, 'auth-container');
+@endphp
+
+@if ($isAuthPage)
+    {{-- Render FULLSCREEN auth layout (login + register) --}}
+    {{ $slot }}
+@else
+    {{-- Default small centered card (password reset, verify email etc.) --}}
+    <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        {{ $slot }}
+    </div>
+@endif
+
+
         </div>
+
     </body>
 </html>
+

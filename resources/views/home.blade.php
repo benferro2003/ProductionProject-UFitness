@@ -16,7 +16,7 @@
     <section class="section container">
         <div class="hero">
             <h1 class="hero-title">Welcome to<br>UniversalFit</h1>
-            <img src="{{ asset('Dumbbell.png') }}" class="hero-icon" alt="Logo">
+            <img src="/images/ufit-logo.svg" class="hero-icon" alt="UFIT Logo">
             <p class="subtitle mt-3">
                 Track your workouts, monitor progress, and achieve your fitness goals.
             </p>
@@ -43,7 +43,7 @@
             <div class="col-50">
                 <div class="panel">
                     <h2 class="section-title">About UFIT</h2>
-                    <p>
+                    <p class="subtitle mt-3">
                         UFIT is a fitness application that allows users to track their workouts, set goals, and monitor progress.
                         The application also provides users with tools such as calculators and workout generators to help them 
                         achieve their fitness goals. Whether you are a beginner or an experienced athlete, UFIT has something 
@@ -58,8 +58,8 @@
                     <h2 class="section-title">Log Progress</h2>
 
                     <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
-                        <a href="{{ route('activityLog.show') }}" class="btn btn-primary btn-lg">Log Workout</a>
-                        <a href="{{ route('weightLog.show') }}" class="btn btn-primary btn-lg">Log Weight</a>
+                        <a href="{{ route('activityLog.show') }}" class="ufit-btn">Log Workout</a>
+                        <a href="{{ route('weightLog.show') }}" class="ufit-btn">Log Weight</a>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                     <h2 class="section-title">Workouts Progress</h2>
 
                     <div class="table-responsive">
-                        <table class="table table-dark table-striped table-hover rounded">
+                        <table class="ufit-table">
                             <thead>
                                 <tr>
                                     <th>Workout Name</th>
@@ -107,7 +107,7 @@
                     <h2 class="section-title">Weight Progress</h2>
 
                     <div class="table-responsive">
-                        <table class="table table-dark table-striped table-hover rounded">
+                        <table class="ufit-table">
                             <thead>
                                 <tr>
                                     <th>Weight (KG)</th>
@@ -165,7 +165,7 @@
                                     vAxis: { title: 'Frequency' },
                                     legend: 'none',
                                     backgroundColor: 'white',
-                                    colors: ['#34495e']
+                                    colors: ['#3FA9F5']
                                 };
 
                                 new google.visualization.ColumnChart(
@@ -202,7 +202,7 @@
                                     vAxis: { title: 'Weight (KG)' },
                                     legend: 'none',
                                     backgroundColor: 'white',
-                                    colors: ['#34495e']
+                                    colors: ['#3FA9F5']
                                 };
 
                                 new google.visualization.LineChart(

@@ -26,8 +26,8 @@
         </div>
     @endif
     <div class="container mt-5">
-        <h1 class="Title">
-            My Plans
+        <h1 class="section-title">
+            MY WORKOUTS
         </h1>
 
         @if ($savedWorkouts->isNotEmpty())
