@@ -1,3 +1,6 @@
+# ---------------------------------------------------------
+# PHP-FPM Container
+# ---------------------------------------------------------
 FROM php:8.2-fpm
 
 # Install system dependencies
@@ -13,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     nodejs \
     npm \
+    nginx \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql
 
@@ -22,21 +26,23 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy project files
+# Copy app files
 COPY . .
 
-# Install Laravel dependencies
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Install & build frontend assets
-RUN npm install
-RUN npm run build
+# Install and build Vite assets
+RUN npm install && npm run build
 
-# Ensure storage link
-RUN php artisan storage:link || true
+# Fix permissions
+RUN chown -R www-data:www-data storage bootstrap/cache
+
+# Copy nginx config
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # Expose port
-EXPOSE 8000
+EXPOSE 80
 
-# Start Laravel server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Start PHP-FPM + nginx
+CMD service nginx start && php-fpm
