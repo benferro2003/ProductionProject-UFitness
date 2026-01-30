@@ -85,6 +85,8 @@
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
 
+                <br>
+
                 {{-- Submit Button --}}
                 <div class="flex items-center justify-end mt-4">
                     <x-primary-button class="ms-3">
@@ -93,9 +95,10 @@
                 </div>
             </form>
 
+
             {{-- Already Registered --}}
-            <div class="mt-5 text-center">
-                <p class="text-gray-600 mb-2">Already have an account?</p>
+            <div class="auth-right">
+                <p class="text-gray-600 mb-3">Already have an account?</p>
                 <x-primary-button>
                     <a href="{{ route('login') }}" class="auth-register-link">
                         Log In
