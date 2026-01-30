@@ -58,25 +58,35 @@ class LogController extends Controller
             return redirect()->route('dashboard')->with('error', 'Weekly weight log already exists, try again next week');
         }
 
-        //sensitivity warning
-        //user's last weight log
-        $currentWeight = auth()->user()->weightLogs()->latest()->value('weight');
-        if ($currentWeight)
-        {
-            //use 2% of the current weight as the maximum difference weight can deviate in a week
-            $maxDifference = $currentWeight * 0.02; // 2% of the current weight
-            //calculate the difference between the current weight and the new weight
-            $difference = abs($currentWeight - $validatedData['weight']);
-            //if the difference is greater than the max difference
-            if($difference > $maxDifference)
-            {
-                //redirect to dashboard with sensitivity warning
-                return redirect()->route('dashboard')->with('error', '<b>Sensitivity Warning:<b><br>
-                Your logged weight is unsafe and will not be logged<br>
-                The safest maximum log would be to lose or gain:<br>' .round($maxDifference,2). ' kg
-                based on your current weight of ' . round($currentWeight,2) . ' kg');
-            }
-        }
+//sensitivity warning
+//user's last weight log
+$lastLog = auth()->user()->weightLogs()->latest()->first();
+if ($lastLog)
+{
+    $currentWeight = $lastLog->weight;
+    $daysSinceLastLog = abs(now()->diffInDays($lastLog->created_at)); // Use abs() to handle any date issues
+    
+    // Allow 2% per week, scaled by time elapsed
+    $weeksSinceLastLog = max(1, $daysSinceLastLog / 7);
+    $maxDifference = $currentWeight * 0.02 * $weeksSinceLastLog;
+    
+    // Optional: Cap at a reasonable maximum (e.g., 12 weeks worth = 24%)
+    $maxDifference = min($maxDifference, $currentWeight * 0.02 * 12);
+    
+    $difference = abs($currentWeight - $validatedData['weight']);
+    
+    if($difference > $maxDifference)
+    {
+        return redirect()->route('dashboard')->with('error', '<b>Sensitivity Warning:
+        Your logged weight appears unusual and will not be logged.
+        Days since last log: ' . $daysSinceLastLog . ' (' . round($weeksSinceLastLog, 1) . ' weeks)
+        Maximum recommended change: ' . round($maxDifference, 2) . ' kg
+        Your change: ' . round($difference, 2) . ' kg
+        (from your previous weight of ' . round($currentWeight, 2) . ' kg)');
+    }
+}
+
+
         
 
 
