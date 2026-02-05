@@ -105,6 +105,15 @@
                                 @php $dayind++; @endphp
                         @endforeach
                     </div>
+
+                    <!-- button to start workout -->
+                    <form action="{{ route('plan.start', $workout->id) }}" method="POST" class="mt-2">
+                        @csrf
+                        <button type="submit" class="btn btn-warning btn-block centre" style="width: 100%;">Select Plan</button>
+                    </form>
+
+                    <br>
+
                     <!-- button to delete workout -->
                     <form action="{{ route('plan.delete', $workout->id) }}" method="POST">
                         @csrf
