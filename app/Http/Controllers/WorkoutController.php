@@ -265,7 +265,7 @@ class WorkoutController extends Controller
         auth()->user()->savedWorkouts()->create([
             'workout_plan' => json_encode($validatedData['workout_plan']),
         ]);
-        
+
         // Return redirect with success
         return redirect()->route('workouts.show')->with('success', 'Workout plan saved successfully!');
     }
@@ -277,7 +277,7 @@ class WorkoutController extends Controller
         foreach ($savedWorkouts as $workout) {
             $workout->workout_plan = json_decode($workout->workout_plan, true);
         }
-        
+
         // Get the saved workouts for the authenticated user
         return view('userInfo.savedWorkouts', [
             'savedWorkouts' => $savedWorkouts,
@@ -291,6 +291,44 @@ class WorkoutController extends Controller
         $workout->delete();
 
         return redirect()->route('workouts.show')->with('success', 'Workout plan deleted successfully!');
+    }
+
+    //function to start workout to live track a workout session
+    public function startWorkout($id)
+    {
+        $workout = SavedWorkout::findOrFail($id);
+
+        // Decode once - this should work fine
+        $workoutPlan = json_decode($workout->workout_plan, true);
+
+        if (is_string($workoutPlan)) {
+            $workoutPlan = json_decode($workoutPlan, true);
+        }
+
+
+        session([
+            'currentWorkout' => $workoutPlan,
+            'workoutId' => $workout->id,
+            'workoutDate' => $workout->created_at->format('d-m-y')
+        ]);
+
+        return redirect()->route('liveTracking.show');
+    }
+
+    //function to show live tracking page
+    public function showLiveWorkout()
+    {
+        $currentWorkout = session('currentWorkout');
+        $workoutDate = session('workoutDate');
+
+        if (!$currentWorkout) {
+            return redirect()->route('workouts.show')->with('error', 'No workout selected. Please select a workout first.');
+        }
+
+        return view('userInfo.liveTracking', [
+            'workout' => $currentWorkout,
+            'workoutDate' => $workoutDate,
+        ]);
     }
 
 }
