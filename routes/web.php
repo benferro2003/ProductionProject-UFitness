@@ -31,6 +31,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/userInfo/savedWorkouts', [WorkoutController::class, 'saveWorkout'])->name('save.workout');
     Route::get('/workouts/result', [WorkoutController::class, 'showResult'])->name('workouts.result');
     Route::delete('/userInfo/savedWorkouts/{id}', [WorkoutController::class, 'deletePlan'])->name('plan.delete');
+    Route::post('/userInfo/savedWorkouts/{id}', [WorkoutController::class, 'startWorkout'])->name('plan.start');
+    Route::get('/userInfo/liveTracking', [WorkoutController::class, 'showLiveWorkout'])->name('liveTracking.show');
 });
 
 //Log routes
