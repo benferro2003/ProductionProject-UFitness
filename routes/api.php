@@ -3,43 +3,52 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ApiWorkoutController;
+use App\Http\Controllers\Api\ApiLogController;
+use App\Http\Controllers\Api\ApiCalculatorController;
 
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
 */
 
 // Public routes (no authentication required)
 Route::prefix('v1')->group(function () {
-    // Authentication routes
+    // Authentication routes only
     Route::post('/auth/register', [AuthController::class, 'register']);
     Route::post('/auth/login', [AuthController::class, 'login']);
 });
 
 // Protected routes (require authentication)
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    
     // Auth routes
     Route::get('/auth/user', [AuthController::class, 'user']);
     Route::post('/auth/logout', [AuthController::class, 'logout']);
     
-    // Workouts routes (we'll add these next)
-    // Route::post('/workouts/generate', [WorkoutController::class, 'generate']);
-    // Route::get('/workouts', [WorkoutController::class, 'index']);
-    // Route::post('/workouts', [WorkoutController::class, 'store']);
-    // Route::delete('/workouts/{id}', [WorkoutController::class, 'destroy']);
+    // Dashboard route
+    Route::get('/dashboard', [ApiLogController::class, 'getDashboard']);
     
-    // Logs routes (we'll add these next)
-    // Route::post('/logs/activity', [LogController::class, 'storeActivity']);
-    // Route::post('/logs/weight', [LogController::class, 'storeWeight']);
-    // Route::get('/logs/activity', [LogController::class, 'getActivity']);
-    // Route::get('/logs/weight', [LogController::class, 'getWeight']);
+    // Calculator routes (PROTECTED - require auth)
+    Route::post('/calculators/calorie', [ApiCalculatorController::class, 'calorie']);
+    Route::post('/calculators/one-rep-max', [ApiCalculatorController::class, 'oneRepMax']);
+    Route::post('/calculators/bmi', [ApiCalculatorController::class, 'bmi']);
     
-    // Dashboard route (we'll add this next)
-    // Route::get('/dashboard', [DashboardController::class, 'index']);
+    // Workout routes
+    Route::post('/workouts/generate', [ApiWorkoutController::class, 'generate']);
+    Route::get('/workouts', [ApiWorkoutController::class, 'index']);
+    Route::post('/workouts', [ApiWorkoutController::class, 'store']);
+    Route::get('/workouts/{id}', [ApiWorkoutController::class, 'show']);
+    Route::delete('/workouts/{id}', [ApiWorkoutController::class, 'destroy']);
+    
+    // Activity Log routes
+    Route::post('/logs/activity', [ApiLogController::class, 'storeActivity']);
+    Route::get('/logs/activity', [ApiLogController::class, 'getActivity']);
+    Route::delete('/logs/activity/{id}', [ApiLogController::class, 'destroyActivity']);
+    
+    // Weight Log routes
+    Route::post('/logs/weight', [ApiLogController::class, 'storeWeight']);
+    Route::get('/logs/weight', [ApiLogController::class, 'getWeight']);
+    Route::delete('/logs/weight/{id}', [ApiLogController::class, 'destroyWeight']);
 });
